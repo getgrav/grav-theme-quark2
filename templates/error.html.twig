@@ -1,0 +1,11 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <div id="error">
+        <div>
+            <h1>{{ 'PLUGIN_ERROR.ERROR'|t }} {{ page.header.http_response_code }}</h1>
+            <p>{{ page.content|raw }}</p>
+            <p><a class="btn" href="{{ home_url }}"><i class="fa-solid fa-house" aria-hidden="true"></i> Back home</a></p>
+        </div>
+    </div>
+{% endblock %}

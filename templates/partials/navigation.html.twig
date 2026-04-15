@@ -1,0 +1,5 @@
+{% import 'macros/macros.html.twig' as macros %}
+
+<ul {{ tree ? 'class="tree navigation"' : 'class="navigation"' }}>
+    {{ macros.nav_loop(pages) }}
+</ul>

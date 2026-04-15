@@ -1,0 +1,20 @@
+{% set image = page.media.images|first %}
+
+<section class="section modular-text {{ page.header.class }}">
+    <div class="container">
+        <div class="columns {{ page.header.image_align|default('align-right') }}">
+            {% if image %}
+                <div class="column">
+                    {{ content|raw }}
+                </div>
+                <div class="column">
+                    {{ image.html|raw }}
+                </div>
+            {% else %}
+                <div class="column" style="grid-column: 1 / -1;">
+                    {{ content|raw }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

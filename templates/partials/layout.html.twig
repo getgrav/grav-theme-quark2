@@ -1,0 +1,11 @@
+{% set show_sidebar = show_sidebar is defined ? show_sidebar : true %}
+<div class="columns">
+    <div id="item" class="column extra-spacing">
+        {% block item %}{% endblock %}
+    </div>
+    {% if show_sidebar %}
+    <aside id="sidebar" class="column">
+        {% block sidebar %}{% endblock %}
+    </aside>
+    {% endif %}
+</div>

@@ -1,0 +1,5 @@
+{% for meta in page.metadata %}
+    {% if meta.name %}<meta name="{{ meta.name }}" content="{{ meta.content|e('html_attr') }}" />{% endif %}
+    {% if meta.property %}<meta property="{{ meta.property }}" content="{{ meta.content|e('html_attr') }}" />{% endif %}
+    {% if meta.http_equiv %}<meta http-equiv="{{ meta.http_equiv }}" content="{{ meta.content|e('html_attr') }}" />{% endif %}
+{% endfor %}

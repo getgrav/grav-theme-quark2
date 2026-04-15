@@ -1,0 +1,11 @@
+{% set id = id|default('hero') %}
+{% set content = content|default(page.content) %}
+<section id="{{ id }}"
+         class="section modular-hero hero {{ page.header.hero_classes }} {{ page.header.background.parallax ? 'parallax' : '' }}"
+         {% if hero_image %}style="background-image: url('{{ hero_image.url }}');"{% endif %}>
+    {% if hero_image %}<div class="image-overlay"></div>{% endif %}
+    <div class="container" style="text-align: {{ page.header.hero_align|default('center') }}">
+        {{ content|raw }}
+    </div>
+    <i id="to-start" class="pulse fa-solid fa-angle-down" aria-hidden="true"></i>
+</section>

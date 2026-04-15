@@ -1,0 +1,47 @@
+{% set feed_url = blog.url == '/' or blog.url == base_url_relative ? (base_url_relative ~ '/' ~ blog.slug) : blog.url %}
+{% set new_base_url = blog.url == '/' ? '' : blog.url %}
+
+{% if config.plugins.simplesearch.enabled %}
+<div class="sidebar-content">
+    {% include 'partials/simplesearch_searchbox.html.twig' ignore missing %}
+</div>
+{% endif %}
+
+{% if config.plugins.relatedpages.enabled and related_pages|length > 0 %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.RELATED_POSTS.HEADLINE'|t }}</h4>
+    {% include 'partials/relatedpages.html.twig' %}
+</div>
+{% endif %}
+
+{% if config.plugins.random.enabled %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.RANDOM_ARTICLE.HEADLINE'|t }}</h4>
+    <a class="btn btn-ghost btn-sm" href="{{ base_url }}/random"><i class="fa-solid fa-shuffle" aria-hidden="true"></i> {{ 'THEME_QUARK2.SIDEBAR.RANDOM_ARTICLE.FEELING_LUCKY'|t }}</a>
+</div>
+{% endif %}
+
+{{ page.find('/modules/sidebar').content|raw }}
+
+{% if config.plugins.taxonomylist.enabled %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.POPULAR_TAGS.HEADLINE'|t }}</h4>
+    {% include 'partials/taxonomylist.html.twig' with {'base_url': new_base_url, 'taxonomy': 'tag', 'children_only': true} %}
+</div>
+{% endif %}
+
+{% if config.plugins.archives.enabled %}
+<div class="sidebar-content">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.ARCHIVES.HEADLINE'|t }}</h4>
+    {% include 'partials/archives.html.twig' with {'base_url': new_base_url} %}
+</div>
+{% endif %}
+
+{% if config.plugins.feed.enabled %}
+<div class="sidebar-content syndicate">
+    <h4>{{ 'THEME_QUARK2.SIDEBAR.SYNDICATE.HEADLINE'|t }}</h4>
+    <a class="btn btn-ghost btn-sm" href="{{ feed_url }}.atom"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> Atom</a>
+    <a class="btn btn-ghost btn-sm" href="{{ feed_url }}.rss"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> RSS</a>
+    {% if config.plugins.feed.enable_json_feed %}<a class="btn btn-ghost btn-sm" href="{{ feed_url }}.json"><i class="fa-solid fa-code" aria-hidden="true"></i> JSON</a>{% endif %}
+</div>
+{% endif %}

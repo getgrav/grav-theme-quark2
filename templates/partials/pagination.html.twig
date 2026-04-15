@@ -1,0 +1,25 @@
+{% if pagination.hasTotal %}
+<ul class="pagination" role="navigation" aria-label="Pagination">
+    {% if pagination.hasPrev %}
+        <li><a href="{{ pagination.prevUrl }}" rel="prev"><i class="fa-solid fa-angle-left" aria-hidden="true"></i></a></li>
+    {% else %}
+        <li class="disabled"><span><i class="fa-solid fa-angle-left" aria-hidden="true"></i></span></li>
+    {% endif %}
+
+    {% for page in pagination.items %}
+        {% if page.isCurrent %}
+            <li class="active"><span>{{ page.value }}</span></li>
+        {% elseif page.value is not null %}
+            <li><a href="{{ page.url }}">{{ page.value }}</a></li>
+        {% else %}
+            <li class="disabled"><span>…</span></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if pagination.hasNext %}
+        <li><a href="{{ pagination.nextUrl }}" rel="next"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></a></li>
+    {% else %}
+        <li class="disabled"><span><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></li>
+    {% endif %}
+</ul>
+{% endif %}

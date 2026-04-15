@@ -1,0 +1,56 @@
+{% extends 'partials/base.html.twig' %}
+{% set blog_image = page.media.images[page.header.hero_image] ?: page.media.images|first %}
+{% set collection = page.collection() %}
+{% set blog = page.find(header_var('blog_url')|defined(theme_var('blog-page'))) %}
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page, blog])|defined(true) %}
+{% set show_sidebar    = header_var('show_sidebar',    [page, blog])|defined(false) %}
+{% set show_pagination = header_var('show_pagination', [page, blog])|defined(true) %}
+{% set has_hero_content = blog_image or page.content|striptags|trim is not empty %}
+
+{% block hero %}
+    {% if blog_image %}
+        {% include 'partials/hero.html.twig' with {id: 'blog-hero', content: page.content, hero_image: blog_image} %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <section id="body-wrapper" class="section blog-listing">
+        <div class="container">
+            {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
+                {% include 'partials/breadcrumbs.html.twig' %}
+            {% endif %}
+
+            {% if not blog_image and page.title %}
+                <header class="blog-page-header">
+                    <h1>{{ page.title }}</h1>
+                    {% if page.header.subtitle %}
+                        <p class="lead">{{ page.header.subtitle }}</p>
+                    {% endif %}
+                    {% if page.content|striptags|trim is not empty %}
+                        <div class="blog-page-intro">{{ page.content|raw }}</div>
+                    {% endif %}
+                </header>
+            {% endif %}
+
+            {% embed 'partials/layout.html.twig' with {blog: page, show_sidebar: show_sidebar} %}
+                {% block item %}
+                    <div class="blog-grid">
+                    {% for child in collection %}
+                        {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
+                    {% endfor %}
+                    </div>
+
+                    {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
+                        <div id="listing-footer">
+                            {% include 'partials/pagination.html.twig' with {base_url: page.url, pagination: collection.params.pagination} %}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                {% block sidebar %}
+                    {% include 'partials/sidebar.html.twig' %}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </section>
+{% endblock %}

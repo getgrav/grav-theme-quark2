@@ -1,0 +1,153 @@
+name: Quark 2
+slug: quark2
+type: theme
+version: 1.0.0
+description: The modernized Grav default theme — PicoCSS foundation, Cal.com-inspired aesthetic, with light/dark/auto mode and Font Awesome 7 icons.
+icon: meteor
+author:
+  name: Team Grav
+  email: devs@getgrav.org
+  url: https://getgrav.org
+homepage: https://github.com/getgrav/grav-theme-quark2
+keywords: quark2, pico, theme, core, modern, fast, responsive, html5, dark-mode
+bugs: https://github.com/getgrav/grav-theme-quark2/issues
+license: MIT
+compatibility:
+  grav: ['1.7', '1.8']
+dependencies:
+  - { name: grav, version: '>=1.7.0' }
+
+form:
+  validation: loose
+
+  fields:
+
+    theme-mode:
+      type: select
+      label: Theme Mode Default
+      help: Default appearance before a user makes a choice. Users can still toggle in the UI.
+      size: small
+      default: auto
+      options:
+        auto: Auto (follows OS)
+        light: Light
+        dark: Dark
+
+    accent-color:
+      type: colorpicker
+      label: Accent Color
+      help: Tints links and focus rings. Leave blank for the pure monochrome palette.
+      default: '#242424'
+
+    header_section:
+      type: section
+      title: Header
+      underline: true
+
+    custom_logo:
+      type: file
+      label: Custom Logo
+      size: large
+      destination: 'theme://images/logo'
+      multiple: false
+      markdown: true
+      accept:
+        - image/*
+
+    custom_logo_mobile:
+      type: file
+      label: Custom Logo (Mobile)
+      size: large
+      destination: 'theme://images/logo'
+      multiple: false
+      accept:
+        - image/*
+
+    header-fixed:
+      type: toggle
+      label: Header Fixed
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    header-animated:
+      type: toggle
+      label: Header Animated
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    header-transparent:
+      type: toggle
+      label: Header Transparent (hero pages)
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    footer_section:
+      type: section
+      title: Footer
+      underline: true
+
+    sticky-footer:
+      type: toggle
+      label: Sticky Footer
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    blog_section:
+      type: section
+      title: Blog
+      underline: true
+
+    blog-page:
+      type: text
+      label: Blog Page Route
+      size: medium
+      default: '/blog'
+
+    icons_section:
+      type: section
+      title: Icons
+      underline: true
+
+    fontawesome.enabled:
+      type: toggle
+      label: Font Awesome 7
+      help: Load Font Awesome 7 free icon set.
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    fontawesome.local:
+      type: toggle
+      label: Serve Font Awesome locally
+      help: When enabled, expects `css/fontawesome/all.min.css` to exist in the theme. Otherwise uses the official CDN.
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool

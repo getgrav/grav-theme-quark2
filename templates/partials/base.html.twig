@@ -1,0 +1,160 @@
+{% set body_classes = body_class(['header-fixed', 'header-animated', 'header-transparent', 'sticky-footer']) %}
+{% set theme_default = theme_var('theme-mode') ?: 'auto' %}
+{% set accent = theme_var('accent-color') %}
+{% set accent_is_hex = accent and accent matches '/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/' %}
+{% set fa_enabled = theme_var('fontawesome.enabled') %}
+{% set fa_local   = theme_var('fontawesome.local') %}
+{% use 'blocks/base.html.twig' %}
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}"
+      data-theme-default="{{ theme_default }}">
+<head>
+{% block head deferred %}
+    <meta charset="utf-8" />
+    <title>{% if page.title %}{{ page.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+
+    {% include 'partials/metadata.html.twig' %}
+
+    <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+
+    {# Preload the critical latin subsets so headings + body text render in-font on first paint #}
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ url('theme://fonts/cal-sans/cal-sans-latin.woff2') }}" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ url('theme://fonts/inter/inter-latin.woff2') }}" />
+
+    {% if accent_is_hex %}
+    {# User-configured accent: tint links, focus ring, and filled UI accents with the chosen hex #}
+    <style>
+      :root {
+        --q2-accent: {{ accent }};
+        --q2-accent-contrast: #ffffff;
+        --q2-link: {{ accent }};
+        --q2-focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
+      }
+      :root[data-theme='dark'] {
+        --q2-accent: color-mix(in oklab, {{ accent }} 80%, white 20%);
+        --q2-accent-contrast: #ffffff;
+        --q2-link: color-mix(in oklab, {{ accent }} 75%, white 25%);
+        --q2-focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
+      }
+    </style>
+    {% endif %}
+
+    {# Pre-paint theme bootstrap — blocks FOUC by setting data-theme synchronously #}
+    <script>
+    (function () {
+      try {
+        var d = document.documentElement;
+        var stored = localStorage.getItem('quark2-theme');
+        var pref = stored || d.getAttribute('data-theme-default') || 'auto';
+        var isDark = pref === 'dark' || (pref === 'auto' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        d.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        d.setAttribute('data-theme-preference', pref);
+      } catch (e) {}
+    })();
+    </script>
+{% endblock head %}
+
+{% block stylesheets %}
+    {% do assets.addCss('theme://css/fonts.css', 100) %}
+    {% do assets.addCss('theme://css/pico.classless.min.css', 95) %}
+    {% do assets.addCss('theme://css/theme.css', 90) %}
+    {% if fa_enabled %}
+        {% if fa_local %}
+            {% do assets.addCss('theme://css/fontawesome/all.min.css', 85) %}
+        {% else %}
+            {% do assets.addCss('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css', 85) %}
+        {% endif %}
+    {% endif %}
+    {% do assets.addCss('theme://css/custom.css', 80) %}
+{% endblock %}
+
+{% block javascripts %}
+    {% do assets.addJs('theme://js/theme-toggle.js', {group:'head', priority: 100}) %}
+    {% do assets.addJs('theme://js/site.js', {group:'bottom', priority: 100}) %}
+{% endblock %}
+
+{% block assets deferred %}
+    {{ assets.css()|raw }}
+    {{ assets.js()|raw }}
+{% endblock %}
+</head>
+<body id="top" class="{% block body_classes %}{{ body_classes }}{% endblock %}">
+    <div id="page-wrapper">
+    {% block header %}
+        <header id="header" class="section">
+            <div class="container">
+                <nav class="navbar" aria-label="Primary">
+                    <div class="navbar-section logo">
+                        {% include 'partials/logo.html.twig' %}
+                    </div>
+                    <div class="navbar-section desktop-menu">
+                        <div class="dropmenu">
+                        {% block header_navigation %}
+                            {% include 'partials/navigation.html.twig' %}
+                        {% endblock %}
+                        </div>
+                    </div>
+                    <div class="navbar-section actions">
+                        {% include 'partials/theme-toggle.html.twig' %}
+                        {% if config.plugins.login.enabled and grav.user.username %}
+                            <span class="login-status-wrapper"><i class="fa-solid fa-user" aria-hidden="true"></i> {% include 'partials/login-status.html.twig' ignore missing %}</span>
+                        {% endif %}
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="mobile-menu">
+            <button type="button" class="button_container" id="toggle" aria-label="Open menu">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+            </button>
+        </div>
+    {% endblock %}
+
+    {% block hero %}{% endblock %}
+
+        <main id="start">
+        {% block body %}
+            <section id="body-wrapper" class="section">
+                <div class="container">
+                    {% block messages %}
+                        {% include 'partials/messages.html.twig' ignore missing %}
+                    {% endblock %}
+                    {{ block('content_surround') }}
+                </div>
+            </section>
+        {% endblock %}
+        </main>
+
+    </div>
+
+    {% block footer %}
+        {% include 'partials/footer.html.twig' %}
+    {% endblock %}
+
+    {% block mobile %}
+    <div class="mobile-container">
+        <div class="overlay" id="overlay" role="dialog" aria-label="Menu">
+            <div class="mobile-logo">
+                {% include 'partials/logo.html.twig' with {mobile: true} %}
+            </div>
+            <nav class="overlay-menu" aria-label="Mobile">
+                {% include 'partials/navigation.html.twig' with {tree: true} %}
+            </nav>
+            <div style="margin-top:2rem;">
+                {% include 'partials/theme-toggle.html.twig' with {labeled: true} %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+{% block bottom %}
+    {{ assets.js('bottom')|raw }}
+{% endblock %}
+</body>
+</html>

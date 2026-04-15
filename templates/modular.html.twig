@@ -1,0 +1,73 @@
+{% extends 'partials/base.html.twig' %}
+
+{% set show_onpage_menu = header.onpage_menu == true or header.onpage_menu is null %}
+
+{% block bottom %}
+    {{ parent() }}
+    {% if show_onpage_menu %}
+        <script>
+        (function () {
+            var header = document.getElementById('header');
+            var offset = header ? header.offsetHeight : 0;
+            document.querySelectorAll('.navigation a[href^="#"]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    var id = a.getAttribute('href').slice(1);
+                    var target = document.getElementById(id);
+                    if (target) {
+                        e.preventDefault();
+                        var top = target.getBoundingClientRect().top + window.scrollY - offset;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                        history.replaceState(null, '', '#' + id);
+                    }
+                });
+            });
+            var sections = document.querySelectorAll('[id]');
+            window.addEventListener('scroll', function () {
+                var y = window.scrollY + offset + 20;
+                var current = null;
+                sections.forEach(function (s) {
+                    if (s.offsetTop <= y) current = s.id;
+                });
+                document.querySelectorAll('.navigation a[href^="#"]').forEach(function (a) {
+                    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+                });
+            }, { passive: true });
+        })();
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block header_navigation %}
+    {% if show_onpage_menu %}
+        <ul class="navigation">
+        {% for module in page.collection() if module.header.visible is not same as(false) %}
+            {% set current_module = (module.active or module.activeChild) ? 'active' : '' %}
+            <li><a class="{{ current_module }}" href="#{{ module.menu|hyphenize }}">{{ module.menu }}</a></li>
+        {% endfor %}
+        {% for mitem in site.menu %}
+            <li>
+                <a {% if mitem.class %}class="{{ mitem.class }}"{% endif %} href="{{ mitem.url }}">
+                    {% if mitem.icon %}<i class="fa-solid fa-{{ mitem.icon }}" aria-hidden="true"></i>{% endif %}
+                    {{ mitem.text }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block hero %}
+    {% for module in page.collection() if module.template == 'modular/hero' %}
+        <div id="{{ module.menu|hyphenize }}"></div>
+        {{ module.content|raw }}
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+    {% for module in page.collection() if module.template != 'modular/hero' %}
+        <div id="{{ module.menu|hyphenize }}"></div>
+        {{ module.content|raw }}
+    {% endfor %}
+{% endblock %}

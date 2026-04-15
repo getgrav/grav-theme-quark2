@@ -1,0 +1,36 @@
+{% set styling %}
+.lightbox-gallery { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+.lightbox-gallery .lightbox-gallery__columns { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.lightbox-gallery img { display: block; width: 100%; height: auto; border-radius: var(--q2-radius-md); box-shadow: var(--q2-shadow-card); transition: transform .2s ease, filter .2s ease; }
+.lightbox-gallery img:hover { transform: translateY(-2px); filter: brightness(0.92); }
+.lightbox-gallery .hidden { display: none; }
+{% endset %}
+
+{% do assets.addInlineCss(styling) %}
+
+{% block module_content %}
+    {% set data = page.header.gallery %}
+    {% set thumb_width = data.thumb.width|default(600) %}
+    {% set thumb_height = data.thumb.height|default(450) %}
+
+    <div class="lightbox-gallery">
+        <div class="lightbox-gallery__columns">
+            {% set gallery = md5(page.url) %}
+            {% for item in data.items %}
+                {% set item_image = page.media[item.image] %}
+                {% set title = item.title|default('') %}
+                {% set desc = item.desc ? '.desc-' ~ md5(item.desc) : '' %}
+                {% set content = item_image.cropZoom(thumb_width, thumb_height).html(title, title) %}
+                {% set image = item_image.url %}
+                {% include 'partials/lightbox.html.twig' ignore missing %}
+            {% endfor %}
+        </div>
+        <div class="hidden">
+            {% for item in data.items if item.desc %}
+                <div class="glightbox-desc desc-{{ md5(item.desc) }}">
+                    <p>{{ item.desc|markdown(false) }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

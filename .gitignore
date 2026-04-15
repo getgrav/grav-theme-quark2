@@ -1,0 +1,4 @@
+.DS_Store
+node_modules
+images/logo/*
+!images/logo/.gitkeep

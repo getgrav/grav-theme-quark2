@@ -1,0 +1,12 @@
+{% set labeled = labeled|default(false) %}
+<button type="button"
+        class="theme-toggle"
+        data-theme-toggle
+        aria-label="Toggle appearance"
+        title="Toggle appearance">
+    {# Sun (light), Moon (dark), Adjust (auto) — Font Awesome 7 free #}
+    <i class="icon icon-sun   fa-solid fa-sun"   aria-hidden="true"></i>
+    <i class="icon icon-moon  fa-solid fa-moon"  aria-hidden="true"></i>
+    <i class="icon icon-auto  fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+    {% if labeled %}<span style="margin-left:.5rem;">{{ 'THEME_QUARK2.THEME_TOGGLE.LABEL'|t }}</span>{% endif %}
+</button>
