@@ -89,9 +89,9 @@
 }
 
 :root[data-theme='dark'] {
-  --q2-bg:              #0b0b0c;
-  --q2-bg-elev:         #121214;
-  --q2-bg-muted:        #16171a;
+  --q2-bg:              #08090b;
+  --q2-bg-elev:         #1d1f25;   /* card surface — lifted for visibility */
+  --q2-bg-muted:        #2a2d34;   /* recessed / hover state */
   --q2-bg-inverse:      #f5f5f5;
 
   --q2-text:            #f2f2f3;
@@ -99,22 +99,22 @@
   --q2-text-muted:      #9a9aa0;
   --q2-text-inverse:    #111111;
 
-  --q2-border-ring:     rgba(255, 255, 255, 0.08);
-  --q2-border-strong:   rgba(255, 255, 255, 0.14);
-  --q2-divider:         rgba(255, 255, 255, 0.08);
+  --q2-border-ring:     rgba(255, 255, 255, 0.14);
+  --q2-border-strong:   rgba(255, 255, 255, 0.20);
+  --q2-divider:         rgba(255, 255, 255, 0.10);
 
   --q2-shadow-card:
-    rgba(0, 0, 0, 0.80) 0 1px 5px -4px,
-    rgba(255, 255, 255, 0.06) 0 0 0 1px,
-    rgba(0, 0, 0, 0.50) 0 4px 8px 0;
+    rgba(0, 0, 0, 0.85) 0 1px 5px -4px,
+    rgba(255, 255, 255, 0.14) 0 0 0 1px,
+    rgba(0, 0, 0, 0.55) 0 4px 12px 0;
   --q2-shadow-raised:
-    rgba(0, 0, 0, 0.80) 0 1px 5px -4px,
-    rgba(255, 255, 255, 0.08) 0 0 0 1px,
-    rgba(0, 0, 0, 0.60) 0 12px 28px -8px;
+    rgba(0, 0, 0, 0.85) 0 1px 5px -4px,
+    rgba(255, 255, 255, 0.14) 0 0 0 1px,
+    rgba(0, 0, 0, 0.65) 0 14px 32px -8px;
   --q2-shadow-dropdown:
-    rgba(0, 0, 0, 0.80) 0 1px 5px -4px,
-    rgba(255, 255, 255, 0.08) 0 0 0 1px,
-    rgba(0, 0, 0, 0.70) 0 16px 32px -12px;
+    rgba(0, 0, 0, 0.85) 0 1px 5px -4px,
+    rgba(255, 255, 255, 0.14) 0 0 0 1px,
+    rgba(0, 0, 0, 0.75) 0 16px 32px -12px;
   --q2-shadow-inset:   inset 0 1px 1.9px rgba(0, 0, 0, 0.5);
   --q2-shadow-hl:      inset 0 1px 0 rgba(255, 255, 255, 0.06);
 
@@ -143,6 +143,19 @@ html { background: var(--q2-bg); color-scheme: light dark; }
 
 /* Reset Pico's blanket <article> chrome — we style cards explicitly */
 article { margin-bottom: 0; padding: 0; border-radius: 0; background: transparent; box-shadow: none; }
+
+/* Pico styles `article > header` / `article > footer` as sectioning blocks
+ * (negative margins, sectioning bg, border, top/bottom radii). Neutralize so
+ * the card-header / card-footer behave as plain content slots. */
+article > header,
+article > footer,
+.card > header,
+.card > footer {
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -358,11 +371,14 @@ blockquote cite, blockquote footer { display: block; font-family: 'Inter', sans-
   background: var(--q2-bg);
 }
 
-/* Simple flex column grid used by blog layout */
+/* Simple column grid used by blog layout. Sidebar layout only kicks in when
+ * the layout has actually rendered an <aside> (signalled via .has-sidebar
+ * by partials/layout.html.twig) — otherwise the item column gets the full
+ * container width. */
 .columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 4vw, 3rem); }
 @media (min-width: 960px) {
-  .columns { grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr); }
-  .columns.reverse { grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr); }
+  .columns.has-sidebar { grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr); }
+  .columns.has-sidebar.reverse { grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr); }
 }
 .column { min-width: 0; }
 
@@ -792,12 +808,30 @@ body.overlay-open { overflow: hidden; }
   flex-direction: column;
   background: var(--q2-bg-elev);
   border-radius: var(--q2-radius-md);
-  box-shadow: var(--q2-shadow-card);
+  box-shadow:
+    rgba(19, 19, 22, 0.04) 0 1px 2px,
+    rgba(19, 19, 22, 0.06) 0 8px 24px -8px;
   overflow: hidden;
   transition: box-shadow .2s ease, transform .2s ease;
   break-inside: avoid;
 }
-.card:hover { box-shadow: var(--q2-shadow-raised); transform: translateY(-2px); }
+.card:hover {
+  box-shadow:
+    rgba(19, 19, 22, 0.06) 0 1px 2px,
+    rgba(19, 19, 22, 0.10) 0 14px 32px -8px;
+  transform: translateY(-2px);
+}
+/* Dark mode — borderless too, just with deeper ambient shadow. */
+:root[data-theme='dark'] .card {
+  box-shadow:
+    rgba(0, 0, 0, 0.40) 0 1px 2px,
+    rgba(0, 0, 0, 0.55) 0 10px 28px -8px;
+}
+:root[data-theme='dark'] .card:hover {
+  box-shadow:
+    rgba(0, 0, 0, 0.50) 0 1px 2px,
+    rgba(0, 0, 0, 0.65) 0 16px 36px -8px;
+}
 
 .card-image { display: block; }
 .card-image img {
@@ -934,9 +968,16 @@ body.overlay-open { overflow: hidden; }
 .sidebar-content {
   background: var(--q2-bg-elev);
   border-radius: var(--q2-radius-md);
-  box-shadow: var(--q2-shadow-card);
+  box-shadow:
+    rgba(19, 19, 22, 0.04) 0 1px 2px,
+    rgba(19, 19, 22, 0.06) 0 8px 24px -8px;
   padding: 1.25rem;
   margin-bottom: 1.5rem;
+}
+:root[data-theme='dark'] .sidebar-content {
+  box-shadow:
+    rgba(0, 0, 0, 0.40) 0 1px 2px,
+    rgba(0, 0, 0, 0.55) 0 10px 28px -8px;
 }
 .sidebar-content h4 {
   font-size: 0.875rem;
@@ -1013,17 +1054,30 @@ body.overlay-open { overflow: hidden; }
   line-height: 1.6;
 }
 
-/* Blog card grid */
+/* Blog card grid — capped at 3 cols max so cards have room to breathe */
 .blog-grid {
   display: grid;
-  gap: clamp(1rem, 2vw, 1.5rem);
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
 }
+@media (min-width: 560px) {
+  .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1200px) {
+  .blog-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* When a sidebar is present, the cards live in the narrower main column,
+   * so 2 cols is the most the space comfortably allows. */
+  .columns.has-sidebar .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.blog-grid > .card { height: 100%; align-self: stretch; }
 
-/* If a blog/item template renders .columns but the sidebar is empty, collapse it */
+/* If sidebar plugins render nothing, collapse the empty aside so it doesn't
+ * take a column slot. Requires .has-sidebar to also be conditionally swapped
+ * if sidebar widgets are all disabled — handled in layout.html.twig. */
 .blog-listing .columns > aside:empty { display: none; }
 @media (min-width: 960px) {
-  .blog-listing .columns:has(> aside:empty) { grid-template-columns: minmax(0, 1fr); }
+  .blog-listing .columns.has-sidebar:has(> aside:empty) { grid-template-columns: minmax(0, 1fr); }
 }
 .content-title { margin-bottom: 2rem; }
 .content-title h1, .content-title h2 { margin-bottom: .5rem; }

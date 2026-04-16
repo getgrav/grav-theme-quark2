@@ -25,15 +25,12 @@
   }
 
   function applyMode(mode) {
-    if (mode === 'light' || mode === 'dark') {
-      root.setAttribute('data-theme', mode);
-    } else {
-      // auto — mirror OS preference
-      root.setAttribute('data-theme', systemPrefersDark() ? 'dark' : 'light');
-      root.setAttribute('data-theme-preference', 'auto');
-      return;
-    }
-    root.setAttribute('data-theme-preference', mode);
+    var resolved = (mode === 'light' || mode === 'dark')
+      ? mode
+      : (systemPrefersDark() ? 'dark' : 'light');
+    root.setAttribute('data-theme', resolved);
+    root.setAttribute('data-theme-preference', mode === 'light' || mode === 'dark' ? mode : 'auto');
+    root.classList.toggle('dark', resolved === 'dark');
   }
 
   function currentPreference() {

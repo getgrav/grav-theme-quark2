@@ -1,7 +1,7 @@
 name: Quark 2
 slug: quark2
 type: theme
-version: 1.0.0
+version: 1.0.1
 description: The modernized Grav default theme — PicoCSS foundation, Cal.com-inspired aesthetic, with light/dark/auto mode and Font Awesome 7 icons.
 icon: meteor
 author:
