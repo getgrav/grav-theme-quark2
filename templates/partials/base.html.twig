@@ -53,6 +53,7 @@
         var isDark = pref === 'dark' || (pref === 'auto' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
         d.setAttribute('data-theme', isDark ? 'dark' : 'light');
         d.setAttribute('data-theme-preference', pref);
+        d.classList.toggle('dark', isDark);
       } catch (e) {}
     })();
     </script>
