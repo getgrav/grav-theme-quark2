@@ -54,7 +54,7 @@
   // Scroll state (for sticky header shadow + animated shrink)
   var lastScrolled = false;
   function onScroll() {
-    var scrolled = window.scrollY > 8;
+    var scrolled = window.scrollY > 20;
     if (scrolled !== lastScrolled) {
       body.classList.toggle('scrolled', scrolled);
       lastScrolled = scrolled;
