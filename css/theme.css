@@ -603,9 +603,9 @@ button.theme-toggle:hover { background: var(--q2-bg-muted); }
 .theme-toggle:hover { background: var(--q2-bg-muted); }
 .theme-toggle:focus-visible { outline: 2px solid var(--q2-focus-ring); outline-offset: 2px; }
 .theme-toggle .icon { width: 18px; height: 18px; display: none; font-size: 16px; line-height: 1; }
-:root[data-theme='light'] .theme-toggle .icon-sun { display: block; }
-:root[data-theme='dark']  .theme-toggle .icon-moon { display: block; }
-:root:not([data-theme='light']):not([data-theme='dark']) .theme-toggle .icon-auto { display: block; }
+:root[data-theme-preference='light'] .theme-toggle .icon-sun  { display: block; }
+:root[data-theme-preference='dark']  .theme-toggle .icon-moon { display: block; }
+:root[data-theme-preference='auto']  .theme-toggle .icon-auto { display: block; }
 
 /* Mobile hamburger */
 .mobile-menu { display: none; position: fixed; top: 14px; right: 14px; z-index: 70; }
