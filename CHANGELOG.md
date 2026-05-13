@@ -1,3 +1,9 @@
+# v1.0.2
+## 05/13/2026
+
+1. [](#bugfix)
+    * Fixed appearance toggle showing the same icon for two consecutive clicks when the OS preference matched the resolved theme — the icon now reflects your light/dark/auto choice rather than the resolved color scheme
+
 # v1.0.1
 ## 04/16/2026
 
