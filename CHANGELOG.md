@@ -1,5 +1,5 @@
 # v1.0.3
-## 05/16/2026
+## 05/17/2026
 
 1. [](#new)
     * Added admin blueprints for the `default`, `blog`, `item`, and `modular` page templates so every option is now editable from the admin panel
