@@ -1,23 +1,29 @@
-{% if pagination.hasTotal %}
+{% set pagination = pagination|default(page.collection.params.pagination) %}
+{% set base_url = base_url|default(page.url) %}
+
+{% if pagination|length > 1 %}
 <ul class="pagination" role="navigation" aria-label="Pagination">
     {% if pagination.hasPrev %}
-        <li><a href="{{ pagination.prevUrl }}" rel="prev"><i class="fa-solid fa-angle-left" aria-hidden="true"></i></a></li>
+        {% set url = (base_url ~ pagination.params ~ pagination.prevUrl)|replace({'//':'/'}) %}
+        <li><a href="{{ url }}" rel="prev"><i class="fa-solid fa-angle-left" aria-hidden="true"></i></a></li>
     {% else %}
         <li class="disabled"><span><i class="fa-solid fa-angle-left" aria-hidden="true"></i></span></li>
     {% endif %}
 
-    {% for page in pagination.items %}
-        {% if page.isCurrent %}
-            <li class="active"><span>{{ page.value }}</span></li>
-        {% elseif page.value is not null %}
-            <li><a href="{{ page.url }}">{{ page.value }}</a></li>
-        {% else %}
-            <li class="disabled"><span>…</span></li>
+    {% for paginate in pagination %}
+        {% if paginate.isCurrent %}
+            <li class="active"><span>{{ paginate.number }}</span></li>
+        {% elseif paginate.isInDelta %}
+            {% set url = (base_url ~ pagination.params ~ paginate.url)|replace({'//':'/'}) %}
+            <li><a href="{{ url }}">{{ paginate.number }}</a></li>
+        {% elseif paginate.isDeltaBorder %}
+            <li class="disabled"><span>&hellip;</span></li>
         {% endif %}
     {% endfor %}
 
     {% if pagination.hasNext %}
-        <li><a href="{{ pagination.nextUrl }}" rel="next"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></a></li>
+        {% set url = (base_url ~ pagination.params ~ pagination.nextUrl)|replace({'//':'/'}) %}
+        <li><a href="{{ url }}" rel="next"><i class="fa-solid fa-angle-right" aria-hidden="true"></i></a></li>
     {% else %}
         <li class="disabled"><span><i class="fa-solid fa-angle-right" aria-hidden="true"></i></span></li>
     {% endif %}

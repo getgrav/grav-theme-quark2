@@ -1,3 +1,14 @@
+# v1.0.3
+## 05/16/2026
+
+1. [](#new)
+    * Added admin blueprints for the `default`, `blog`, `item`, and `modular` page templates so every option is now editable from the admin panel
+    * Added admin blueprints for the `hero`, `features`, `text`, and `gallery` modular sub-templates
+1. [](#bugfix)
+    * Fixed pagination rendering as empty on blog listings when the Pagination plugin is enabled
+    * Fixed the sticky header flickering between its full and collapsed sizes when scrolled to right around the trigger point
+    * Fixed a 500 error that could occur when a custom logo value was left in a malformed or empty state, now falls back to the default Grav logo
+
 # v1.0.2
 ## 05/13/2026
 

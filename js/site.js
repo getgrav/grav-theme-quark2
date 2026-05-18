@@ -52,9 +52,16 @@
   }
 
   // Scroll state (for sticky header shadow + animated shrink)
+  // Hysteresis: the navbar shrinks by 12px when `.scrolled` is on, which
+  // shifts layout and can flip scrollY back over a single threshold. The
+  // 16px dead zone between ON_AT and OFF_AT is wider than that delta so a
+  // toggle-induced layout shift can never re-cross the opposite threshold.
+  var SCROLL_ON_AT = 20;
+  var SCROLL_OFF_AT = 4;
   var lastScrolled = false;
   function onScroll() {
-    var scrolled = window.scrollY > 8;
+    var y = window.scrollY;
+    var scrolled = lastScrolled ? y > SCROLL_OFF_AT : y > SCROLL_ON_AT;
     if (scrolled !== lastScrolled) {
       body.classList.toggle('scrolled', scrolled);
       lastScrolled = scrolled;

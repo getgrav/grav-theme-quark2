@@ -1,0 +1,49 @@
+title: Gallery
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+        gallery:
+          type: tab
+          title: Gallery
+          fields:
+            header.gallery.thumb.width:
+              type: text
+              label: Thumbnail Width
+              default: 600
+              size: x-small
+              validate:
+                type: int
+                min: 1
+
+            header.gallery.thumb.height:
+              type: text
+              label: Thumbnail Height
+              default: 450
+              size: x-small
+              validate:
+                type: int
+                min: 1
+
+            header.gallery.items:
+              name: items
+              type: list
+              label: Gallery Items
+              style: vertical
+              collapsed: true
+
+              fields:
+                .image:
+                  type: filepicker
+                  label: Image
+                  preview_images: true
+                .title:
+                  type: text
+                  label: Title
+                .desc:
+                  type: textarea
+                  label: Description
+                  markdown: true
+                  rows: 4
