@@ -1,0 +1,15 @@
+extends@: default
+
+form:
+  fields:
+    tabs:
+      fields:
+        advanced:
+          fields:
+            columns:
+              fields:
+                column1:
+                   fields:
+                     header.body_classes:
+                       markdown: true
+                       description: 'Available classes in Quark 2 (space separated):<br />`header-fixed`, `header-animated`, `header-transparent`, `sticky-footer`'

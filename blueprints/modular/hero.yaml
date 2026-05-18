@@ -1,0 +1,21 @@
+title: Hero
+'@extends': default
+
+form:
+  fields:
+    tabs:
+      fields:
+        buttons:
+          type: tab
+          title: Hero
+          fields:
+            header.hero_classes:
+              type: text
+              label: Hero Classes
+              markdown: true
+              description: 'Space separated Hero classes:<br />`text-light`, `text-dark`, `title-h1h2`, `parallax`, `overlay-dark-gradient`, `overlay-light-gradient`, `overlay-dark`, `overlay-light`, `hero-fullscreen`, `hero-large`, `hero-medium`, `hero-small`, `hero-tiny`'
+            header.hero_image:
+              type: filepicker
+              label: Hero Image
+              preview_images: true
+              description: 'If not specified, defaults to the first image found in the page''s folder'
