@@ -86,6 +86,9 @@
   --pico-form-element-border-color: rgba(34, 42, 53, 0.16);
   --pico-form-element-color:     var(--q2-text);
   --pico-form-element-focus-color: var(--q2-focus-ring);
+  /* Pico draws checked checkbox/radio fill from these — point them at the accent */
+  --pico-primary-background:     var(--q2-accent);
+  --pico-primary-border:         var(--q2-accent);
 }
 
 :root[data-theme='dark'] {
@@ -135,6 +138,8 @@
   --pico-form-element-background-color: var(--q2-bg-elev);
   --pico-form-element-border-color: rgba(255, 255, 255, 0.12);
   --pico-form-element-color:     var(--q2-text);
+  --pico-primary-background:     var(--q2-accent);
+  --pico-primary-border:         var(--q2-accent);
 }
 
 /* ---------- Base ---------- */
@@ -284,7 +289,7 @@ blockquote cite, blockquote footer { display: block; font-family: 'Inter', sans-
  */
 .markdown-alert {
   --alert-accent: var(--q2-text);
-  --alert-bg: color-mix(in oklab, var(--alert-accent) 6%, var(--q2-bg-elev));
+  --alert-bg: color-mix(in srgb, var(--alert-accent) 6%, var(--q2-bg-elev));
   border-left: 4px solid var(--alert-accent);
   background: var(--alert-bg);
   border-radius: var(--q2-radius-sm);
@@ -726,8 +731,8 @@ body.overlay-open { overflow: hidden; }
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 20% 0%, color-mix(in oklab, var(--q2-text) 5%, transparent), transparent 60%),
-    radial-gradient(ellipse at 80% 100%, color-mix(in oklab, var(--q2-text) 4%, transparent), transparent 55%);
+    radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--q2-text) 5%, transparent), transparent 60%),
+    radial-gradient(ellipse at 80% 100%, color-mix(in srgb, var(--q2-text) 4%, transparent), transparent 55%);
   pointer-events: none;
   z-index: -1;
 }
@@ -948,6 +953,359 @@ body.overlay-open { overflow: hidden; }
 
 .form-checkbox, .form-radio { display: inline-flex; align-items: center; gap: .5rem; font-size: 0.9375rem; }
 .form-errors { color: #d12c2c; font-size: 0.8125rem; margin-top: .25rem; }
+
+/* ---------- Form plugin fields ---------- */
+
+/* Tabs — defeat form plugin's box-around-active + forced span color, give proper underlined active state */
+.form-tabs .tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--q2-divider);
+}
+.form-tabs .tabs-nav a.tab__link,
+.form-tabs .tabs-nav .tab__link {
+  flex: 0 0 auto;
+  padding: .75rem 1.25rem;
+  margin: 0 0 -1px 0;
+  color: var(--q2-text-muted);
+  background: transparent;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-align: center;
+  text-decoration: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease;
+}
+.form-tabs .tabs-nav a.tab__link span,
+.form-tabs .tabs-nav .tab__link span { color: inherit; }
+.form-tabs .tabs-nav a.tab__link:hover,
+.form-tabs .tabs-nav .tab__link:hover { color: var(--q2-text-strong); text-decoration: none; }
+.form-tabs .tabs-nav a.tab__link.active,
+.form-tabs .tabs-nav .tab__link.active {
+  color: var(--q2-text-strong);
+  border: 0;
+  border-bottom: 2px solid var(--q2-accent);
+  margin: 0 0 -1px 0;
+}
+.form-tabs .tabs-nav a.tab__link.active span,
+.form-tabs .tabs-nav .tab__link.active span { color: var(--q2-text-strong); }
+.form-tabs .tabs-content .tab__content { display: none; padding-top: 1.5rem; }
+.form-tabs .tabs-content .tab__content.active { display: block; }
+
+/* Toggle (switch-toggle) — single segmented control, no inter-label margin */
+.switch-toggle.switch-grav {
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--q2-bg-elev);
+  border: 1px solid var(--q2-border-strong);
+  border-radius: var(--q2-radius);
+  overflow: hidden;
+  line-height: 1;
+}
+.switch-toggle.switch-grav input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+/* Neutralize Pico's `[type=radio]~label:not(:last-of-type)` 1em margin inside the toggle */
+.switch-toggle.switch-grav input[type='radio'] ~ label:not(:last-of-type),
+.switch-toggle.switch-grav input[type='checkbox'] ~ label:not(:last-of-type) {
+  margin-inline-end: 0;
+}
+.switch-toggle.switch-grav label {
+  margin: 0;
+  padding: .625rem 1rem;
+  line-height: 1.15;
+  color: var(--q2-text-muted);
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  border-inline-start: 1px solid var(--q2-border-strong);
+  transition: background .15s ease, color .15s ease;
+}
+.switch-toggle.switch-grav label:first-of-type { border-inline-start: 0; }
+.switch-toggle.switch-grav label:hover { color: var(--q2-text-strong); }
+/* Beat form plugin's `.switch-toggle input:checked+label { color:#fff; background:#999 }` */
+.switch-toggle.switch-grav input[type='radio']:checked + label,
+.switch-toggle.switch-grav input[type='radio'].highlight:checked + label {
+  background: var(--q2-accent);
+  color: var(--q2-accent-contrast);
+  border-inline-start-color: var(--q2-accent);
+}
+.switch-toggle.switch-grav input[type='radio']:focus-visible + label {
+  outline: 2px solid var(--q2-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Submit / reset buttons — match .btn, never full-width.
+ * Wrapper class varies by form (`buttons` default, `button-wrapper` in some blueprints). */
+.form-wrapper .buttons,
+.form-wrapper .button-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .625rem;
+  margin-top: 1.75rem;
+}
+.form-wrapper .buttons button,
+.form-wrapper .buttons input[type='submit'],
+.form-wrapper .buttons input[type='reset'],
+.form-wrapper .button-wrapper button,
+.form-wrapper .button-wrapper input[type='submit'],
+.form-wrapper .button-wrapper input[type='reset'] {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .625rem 1.125rem;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.1px;
+  color: var(--q2-accent-contrast);
+  background: var(--q2-accent);
+  border: 0;
+  border-radius: var(--q2-radius);
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--q2-shadow-hl);
+  transition: opacity .15s ease, transform .05s ease;
+}
+.form-wrapper .buttons button:hover,
+.form-wrapper .buttons input[type='submit']:hover,
+.form-wrapper .button-wrapper button:hover,
+.form-wrapper .button-wrapper input[type='submit']:hover { opacity: 0.9; color: var(--q2-accent-contrast); }
+.form-wrapper .buttons button:active,
+.form-wrapper .button-wrapper button:active { transform: translateY(0.5px); }
+.form-wrapper .buttons button[type='reset'],
+.form-wrapper .buttons input[type='reset'],
+.form-wrapper .button-wrapper button[type='reset'],
+.form-wrapper .button-wrapper input[type='reset'] {
+  background: var(--q2-bg-elev);
+  color: var(--q2-text);
+  box-shadow: var(--q2-shadow-card);
+}
+.form-wrapper .buttons button[type='reset']:hover,
+.form-wrapper .button-wrapper button[type='reset']:hover {
+  background: var(--q2-bg-muted);
+  color: var(--q2-text);
+  opacity: 1;
+}
+
+/* Checkboxes & radios — accent-tinted, dark-mode-friendly, consistent sizing */
+.form-wrapper input[type='checkbox'],
+.form-wrapper input[type='radio'] {
+  accent-color: var(--q2-accent);
+  width: 1.25rem;
+  height: 1.25rem;
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+/* Force squares for checkboxes — Pico's 8px radius on a 17px input renders nearly circular */
+.form-wrapper input[type='checkbox'] { border-radius: var(--q2-radius-xs); }
+
+/* `.checkboxes` group AND `.checkboxes.toggleable` (the field-enable toggle):
+ * form plugin display:none's the native input and uses label::before for the box,
+ * absolutely positioned at left:0 — that breaks when the label is empty (toggleable)
+ * and forces every consumer to reserve 20px of padding. Flatten the pseudo to
+ * static flow so it sits inline like a real checkbox glyph. */
+.form-wrapper .checkboxes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1.25rem;
+}
+.form-wrapper .checkboxes > label,
+.form-wrapper .checkboxes.toggleable > label {
+  position: static;
+  margin: 0;
+  padding: 0;
+}
+.form-wrapper .checkboxes label::before,
+.form-wrapper .checkboxes.toggleable label::before {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0 .5rem 0 0;
+  padding: 0;
+  vertical-align: middle;
+  line-height: 1;
+  font-size: 0.875rem;
+  border: 1px solid var(--q2-border-strong);
+  background: var(--q2-bg-elev);
+  border-radius: var(--q2-radius-xs);
+  color: var(--q2-text);
+}
+.form-wrapper .checkboxes input[type='checkbox']:checked + label::before,
+.form-wrapper .checkboxes.toggleable input[type='checkbox']:checked + label::before {
+  content: '';
+  background-color: var(--q2-accent);
+  background-image: var(--pico-icon-checkbox);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 64%;
+  border-color: var(--q2-accent);
+  color: transparent;
+}
+
+/* Basic captcha — strip the form plugin's hard-coded #ccc chrome and the
+ * accent-button styling that bleeds onto the reload icon. Constrain the
+ * image so the reload button stays visible. */
+.form-wrapper .form-data.basic-captcha .form-input-wrapper {
+  border-color: var(--q2-border-strong);
+  border-radius: var(--q2-radius);
+  background: var(--q2-bg-elev);
+  align-items: stretch;
+}
+.form-wrapper .form-data.basic-captcha .form-input-prepend {
+  background: var(--q2-bg-muted);
+  color: var(--q2-text);
+  align-items: center;
+  padding: 0 .25rem 0 0;
+}
+.form-wrapper .form-data.basic-captcha .form-input-prepend img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 130px;
+  margin: 0;
+  align-self: stretch;
+  object-fit: cover;
+}
+.form-wrapper .form-data.basic-captcha .form-input-prepend .reload-captcha-button {
+  background: transparent;
+  color: var(--q2-text-muted);
+  border: 0;
+  border-radius: var(--q2-radius-sm);
+  padding: .25rem .5rem;
+  margin: 0;
+  width: auto;
+  height: auto;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color .15s ease, background .15s ease;
+}
+.form-wrapper .form-data.basic-captcha .form-input-prepend .reload-captcha-button:hover {
+  color: var(--q2-text-strong);
+  background: var(--q2-bg-elev);
+  opacity: 1;
+}
+.form-wrapper .form-data.basic-captcha .form-input-prepend .reload-captcha-button svg {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+.form-wrapper .form-data.basic-captcha input.form-input {
+  margin: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+}
+.form-wrapper .form-data.basic-captcha input.form-input:focus {
+  box-shadow: none;
+}
+
+/* Dropzone (default `file` field) — strip hardcoded white + #ccc dashed border for dark mode */
+.form-wrapper .form-input-file.dropzone,
+.form-wrapper .dropzone {
+  background: var(--q2-bg-elev);
+  border: 2px dashed var(--q2-border-strong);
+  border-radius: var(--q2-radius);
+  color: var(--q2-text-muted);
+  padding: 1.25rem .5rem;
+  transition: border-color .15s ease, color .15s ease;
+}
+.form-wrapper .dropzone:hover {
+  border-color: var(--q2-accent);
+  color: var(--q2-text);
+}
+.form-wrapper .dropzone .dz-default.dz-message {
+  color: var(--q2-text-muted);
+}
+/* Neutralize the dz-button — Pico styles it as a primary accent pill by default */
+.form-wrapper .dropzone .dz-button,
+.form-wrapper .dropzone .dz-default button {
+  background: var(--q2-bg-muted);
+  color: var(--q2-text);
+  border: 1px solid var(--q2-border-ring);
+  border-radius: var(--q2-radius);
+  padding: .5rem 1rem;
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.form-wrapper .dropzone .dz-button:hover,
+.form-wrapper .dropzone .dz-default button:hover {
+  background: var(--q2-bg-elev);
+  color: var(--q2-text-strong);
+  opacity: 1;
+}
+.form-wrapper .dropzone .dz-preview .dz-image {
+  background: var(--q2-bg-muted);
+}
+.form-wrapper .dropzone .dz-preview .dz-remove {
+  text-decoration: none;
+  line-height: 1;
+}
+.form-wrapper .dropzone .dz-preview .dz-remove:hover {
+  text-decoration: none;
+}
+
+/* Filepond — panels are filepond's own light-cream backgrounds; align to theme */
+.form-wrapper .filepond--panel-root,
+.form-wrapper .filepond--panel-top,
+.form-wrapper .filepond--panel-center,
+.form-wrapper .filepond--panel-bottom {
+  background: var(--q2-bg-elev);
+}
+.form-wrapper .filepond--root {
+  border: 1px solid var(--q2-border-strong);
+  border-radius: var(--q2-radius);
+  color: var(--q2-text);
+}
+.form-wrapper .filepond--drop-label {
+  color: var(--q2-text-muted);
+}
+.form-wrapper .filepond--drop-label label {
+  color: var(--q2-text-muted);
+}
+.form-wrapper .filepond--label-action {
+  color: var(--q2-text-strong);
+  text-decoration-color: var(--q2-text-muted);
+}
+.form-wrapper .filepond--credits {
+  color: var(--q2-text-muted);
+  opacity: 0.5;
+}
+.form-wrapper .filepond--file-action-button {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+.form-wrapper .filepond--item-panel {
+  background: var(--q2-bg-muted);
+}
 
 .toast {
   display: flex; align-items: center; gap: .625rem;

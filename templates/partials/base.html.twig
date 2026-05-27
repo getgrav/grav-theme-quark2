@@ -32,13 +32,13 @@
         --q2-accent: {{ accent }};
         --q2-accent-contrast: #ffffff;
         --q2-link: {{ accent }};
-        --q2-focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
+        --q2-focus-ring: color-mix(in srgb, {{ accent }} 45%, transparent);
       }
       :root[data-theme='dark'] {
-        --q2-accent: color-mix(in oklab, {{ accent }} 80%, white 20%);
+        --q2-accent: color-mix(in srgb, {{ accent }} 80%, white 20%);
         --q2-accent-contrast: #ffffff;
-        --q2-link: color-mix(in oklab, {{ accent }} 75%, white 25%);
-        --q2-focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
+        --q2-link: color-mix(in srgb, {{ accent }} 75%, white 25%);
+        --q2-focus-ring: color-mix(in srgb, {{ accent }} 45%, transparent);
       }
     </style>
     {% endif %}
