@@ -1,3 +1,17 @@
+# v1.0.4
+## 05/27/2026
+
+1. [](#bugfix)
+    * Fixed Disqus comments failing to load when a page is opened directly in dark mode
+1. [](#improved)
+    * Form tabs now have a visible active state in dark mode and use a clean underlined nav style
+    * Form toggles now match input field height and use the configured accent color for the selected option
+    * Form submit and reset buttons no longer stretch the full container width and use a readable foreground color against the accent background
+    * Form checkboxes and radios now pick up the configured accent color and have consistent sizing across light and dark modes
+    * Form basic captcha now uses the theme palette, the verification image fills the field vertically, and the reload button is always visible
+    * Form file upload (Dropzone) now renders with dark mode colors and a muted action button instead of an accent-styled pill
+    * Form Filepond uploader panels, labels, and item action buttons now use the theme palette in dark mode
+
 # v1.0.3
 ## 05/17/2026
 
