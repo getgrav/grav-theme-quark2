@@ -41,18 +41,6 @@
         --q2-focus-ring: color-mix(in oklab, {{ accent }} 45%, transparent);
       }
     </style>
-    {% if config.plugins.jscomments.enabled %}
-    {# JSComments/Disqus compatibility: their embed.js parseColor predates color()/oklab() and
-       crashes when it samples a computed color-mix() value. Override the tint vars inside the
-       widget only, with pre-resolved rgb()/rgba() values. Page-wide oklab mixing is untouched. #}
-    <style>
-      #disqus_thread {
-        --q2-accent: {{ q2_mix_white(accent, 80) }};
-        --q2-link: {{ q2_mix_white(accent, 75) }};
-        --q2-focus-ring: {{ q2_mix_alpha(accent, 45) }};
-      }
-    </style>
-    {% endif %}
     {% endif %}
 
     {# Pre-paint theme bootstrap — blocks FOUC by setting data-theme synchronously #}
