@@ -289,7 +289,7 @@ blockquote cite, blockquote footer { display: block; font-family: 'Inter', sans-
  */
 .markdown-alert {
   --alert-accent: var(--q2-text);
-  --alert-bg: color-mix(in srgb, var(--alert-accent) 6%, var(--q2-bg-elev));
+  --alert-bg: color-mix(in oklab, var(--alert-accent) 6%, var(--q2-bg-elev));
   border-left: 4px solid var(--alert-accent);
   background: var(--alert-bg);
   border-radius: var(--q2-radius-sm);
@@ -731,8 +731,8 @@ body.overlay-open { overflow: hidden; }
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 20% 0%, color-mix(in srgb, var(--q2-text) 5%, transparent), transparent 60%),
-    radial-gradient(ellipse at 80% 100%, color-mix(in srgb, var(--q2-text) 4%, transparent), transparent 55%);
+    radial-gradient(ellipse at 20% 0%, color-mix(in oklab, var(--q2-text) 5%, transparent), transparent 60%),
+    radial-gradient(ellipse at 80% 100%, color-mix(in oklab, var(--q2-text) 4%, transparent), transparent 55%);
   pointer-events: none;
   z-index: -1;
 }
