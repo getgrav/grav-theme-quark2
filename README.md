@@ -192,6 +192,26 @@ The theme loads `css/custom.css` last. Any rules placed there win over the theme
 
 All colors, radii, and shadows are defined as CSS custom properties on `:root` and `:root[data-theme='dark']` in `css/theme.css` (prefix: `--q2-`). Override them in `custom.css` to re-skin without touching the theme source.
 
+## Disqus / JSComments dark-mode workaround
+
+Quark 2's accent tints use the modern CSS `color-mix(in oklab, …)` function. Browsers serialize the computed result as `oklab(…)` (or `color(srgb …)` for `in srgb`). Disqus's embed.js ships an older color parser that does not understand either form, and it throws an exception sampling computed styles, which prevents the comments thread from initializing on first paint in dark mode. (Light mode works because the un-mixed accent stays as plain hex.)
+
+This is a Disqus-specific issue and the rest of the theme has no reason to compromise on `color-mix`, so the fix is opt-in. If you embed Disqus (typically via the [JSComments plugin](https://github.com/getgrav/grav-plugin-jscomments)) and want dark mode to work, copy `partials/base.html.twig` into your child theme (or override it inline) and add the following block just after the existing `:root[data-theme='dark']` style block:
+
+```twig
+{% if config.plugins.jscomments.enabled %}
+<style>
+  #disqus_thread {
+    --q2-accent: {{ q2_mix_white(accent, 80) }};
+    --q2-link: {{ q2_mix_white(accent, 75) }};
+    --q2-focus-ring: {{ q2_mix_alpha(accent, 45) }};
+  }
+</style>
+{% endif %}
+```
+
+The `q2_mix_white(hex, pct)` and `q2_mix_alpha(hex, pct)` Twig functions are shipped by the theme (registered in `quark2.php`) and return pre-resolved `rgb(…)` / `rgba(…)` strings. Scoping the override to `#disqus_thread` keeps the rest of the page on full `oklab` mixing, and only the Disqus widget sees the pre-resolved values that its parser understands.
+
 ## License
 
 MIT

@@ -3,7 +3,9 @@
 
 1. [](#bugfix)
     * Restored the oklab color-mixing across the theme that was temporarily switched to sRGB in 1.0.4 — links, accents, focus rings, alert backgrounds, and hero gradients are back to their original tints
-    * Fixed Disqus comments still failing to load in dark mode after 1.0.4 — the embed widget now receives pre-resolved rgb()/rgba() versions of the accent vars, scoped to `#disqus_thread` only, so the rest of the page keeps full oklab mixing
+1. [](#new)
+    * Added two Twig helpers, `q2_mix_white(hex, pct)` and `q2_mix_alpha(hex, pct)`, that return pre-resolved `rgb()` / `rgba()` strings for sites that need to feed third-party widgets a color value their parser can understand
+    * Documented an optional `#disqus_thread` override block in the README for sites running Disqus via JSComments, where the embed's older color parser cannot read modern `color-mix()` results in dark mode
 
 # v1.0.4
 ## 05/27/2026
