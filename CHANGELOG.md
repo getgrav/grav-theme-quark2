@@ -1,3 +1,10 @@
+# v1.0.5
+## 05/28/2026
+
+1. [](#bugfix)
+    * Restored the oklab color-mixing across the theme that was temporarily switched to sRGB in 1.0.4 — links, accents, focus rings, alert backgrounds, and hero gradients are back to their original tints
+    * Fixed Disqus comments still failing to load in dark mode after 1.0.4 — the embed widget now receives pre-resolved rgb()/rgba() versions of the accent vars, scoped to `#disqus_thread` only, so the rest of the page keeps full oklab mixing
+
 # v1.0.4
 ## 05/27/2026
 
