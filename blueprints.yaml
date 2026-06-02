@@ -1,15 +1,15 @@
 name: Quark 2
 slug: quark2
 type: theme
-version: 1.0.5
-description: The modernized Grav default theme — PicoCSS foundation, Cal.com-inspired aesthetic, with light/dark/auto mode and Font Awesome 7 icons.
+version: 1.1.0
+description: The modernized Grav default theme — Blades CSS foundation, Cal.com-inspired aesthetic, with light/dark/auto mode and Font Awesome 7 icons.
 icon: meteor
 author:
   name: Team Grav
   email: devs@getgrav.org
   url: https://getgrav.org
 homepage: https://github.com/getgrav/grav-theme-quark2
-keywords: quark2, pico, theme, core, modern, fast, responsive, html5, dark-mode
+keywords: quark2, blades, pico, theme, core, modern, fast, responsive, html5, dark-mode
 bugs: https://github.com/getgrav/grav-theme-quark2/issues
 license: MIT
 compatibility:

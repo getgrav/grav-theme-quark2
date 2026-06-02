@@ -1,0 +1,17 @@
+{
+  "name": "grav-theme-quark2",
+  "version": "1.1.0",
+  "description": "Build tooling for the Quark 2 theme's CSS foundation (Blades CSS, the actively-maintained Pico CSS successor).",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build:css": "cleancss -o css/blades.min.css node_modules/@anyblades/blades/css/blades.css",
+    "build": "npm run build:css"
+  },
+  "dependencies": {
+    "@anyblades/blades": "^2.3.0"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3"
+  }
+}
