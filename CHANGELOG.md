@@ -1,3 +1,14 @@
+# v1.1.0
+## 06/01/2026
+
+1. [](#improved)
+    * Moved the theme's CSS foundation to Blades CSS, the actively maintained successor to the now-dormant Pico CSS, with no change to the look or layout
+    * Added a small npm build so the CSS base can be refreshed with `npm install && npm run build` instead of swapping files by hand
+    * Tightened the spacing inside dropdown menus so longer menus stay compact and no longer run off the bottom of the screen
+1. [](#bugfix)
+    * Fixed the PHP Debug Bar message text being unreadable in light mode
+    * Fixed the third-level dropdown menu sitting slightly too high next to the item that opens it
+
 # v1.0.5
 ## 05/28/2026
 
