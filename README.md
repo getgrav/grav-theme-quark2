@@ -192,6 +192,27 @@ The theme loads `css/custom.css` last. Any rules placed there win over the theme
 
 All colors, radii, and shadows are defined as CSS custom properties on `:root` and `:root[data-theme='dark']` in `css/theme.css` (prefix: `--q2-`). Override them in `custom.css` to re-skin without touching the theme source.
 
+### Custom fonts
+
+The fonts are driven by three CSS variables, set on `:root` in `css/theme.css`:
+
+```css
+--pico-font-family-display;      /* Cal Sans — headings and other display text */
+--pico-font-family-sans-serif;   /* Inter — body copy and UI text */
+--pico-font-family-monospace;    /* code, pre, kbd, samp */
+```
+
+Every heading, paragraph, button, and label reads its font from one of these, so you can swap the display or body face for the whole theme from `custom.css` with a single line — no need to hunt through the stylesheet:
+
+```css
+:root {
+  --pico-font-family-display: "Playfair Display", serif;
+  --pico-font-family-sans-serif: "Helvetica Neue", system-ui, sans-serif;
+}
+```
+
+If your replacement face is not a system font, load it first (a `@font-face` block in `custom.css`, or a `<link>` to a hosted stylesheet) the same way the bundled Cal Sans and Inter faces are declared in `css/fonts.css`.
+
 ### Updating the CSS foundation
 
 The base CSS comes from [Blades CSS](https://github.com/anyblades/blades) and ships pre-built as `css/blades.min.css`. The version is pinned in `package.json`. To rebuild it:

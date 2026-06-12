@@ -1,3 +1,9 @@
+# v1.1.1
+## 06/12/2026
+
+1. [](#improved)
+    * Headings and body text now read their fonts from CSS variables, so the display and sans-serif fonts can be changed from custom.css without editing the theme
+
 # v1.1.0
 ## 06/01/2026
 
