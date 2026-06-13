@@ -21,7 +21,7 @@
                     }
                 });
             });
-            var sections = document.querySelectorAll('[id]');
+            var sections = document.querySelectorAll('.module-anchor');
             window.addEventListener('scroll', function () {
                 var y = window.scrollY + offset + 20;
                 var current = null;
@@ -60,14 +60,14 @@
 
 {% block hero %}
     {% for module in page.collection() if module.template == 'modular/hero' %}
-        <div id="{{ module.menu|hyphenize }}"></div>
+        <div id="{{ module.menu|hyphenize }}" class="module-anchor"></div>
         {{ module.content|raw }}
     {% endfor %}
 {% endblock %}
 
 {% block body %}
     {% for module in page.collection() if module.template != 'modular/hero' %}
-        <div id="{{ module.menu|hyphenize }}"></div>
+        <div id="{{ module.menu|hyphenize }}" class="module-anchor"></div>
         {{ module.content|raw }}
     {% endfor %}
 {% endblock %}
