@@ -2235,6 +2235,9 @@ body > main {
   list-style: none;
   padding: 0;
 }
+.pagination li {
+  list-style: none; /* override Pico's `ul li { list-style: square }` */
+}
 .pagination li a,
 .pagination li span {
   display: inline-flex;
