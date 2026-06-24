@@ -2247,13 +2247,14 @@ body > main {
   text-decoration: none;
   color: var(--q2-text);
   background: var(--q2-bg-elev);
-  box-shadow: var(--q2-shadow-card);
+  border: 1px solid var(--q2-border-ring);
   font-size: 0.875rem;
 }
 .pagination li.active a,
 .pagination li.active span {
   background: var(--q2-text);
   color: var(--q2-text-inverse);
+  border-color: transparent;
 }
 
 /* ---------- Scroll-top ---------- */
