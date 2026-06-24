@@ -2,7 +2,6 @@
 ## 06/24/2026
 
 1. [](#bugfix)
-    * The active pagination button no longer shows a square outline around its rounded fill in dark mode
     * On-page menu items now highlight as active on modular pages
 
 # v1.1.1
