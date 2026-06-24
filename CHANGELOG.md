@@ -1,3 +1,10 @@
+# v1.1.2
+## 06/24/2026
+
+1. [](#bugfix)
+    * Pagination buttons no longer show list-item markers
+    * On-page menu items now highlight as active on modular pages
+
 # v1.1.1
 ## 06/12/2026
 
