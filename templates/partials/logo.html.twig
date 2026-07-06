@@ -3,7 +3,11 @@
 {% set logo_file = logo_first.name|default(null) %}
 <a href="{{ home_url }}" class="navbar-brand" aria-label="{{ site.title }}" title="{{ site.title }}">
 {% if logo_file %}
-    <img src="{{ url('theme://images/logo/' ~ logo_file) }}" alt="{{ site.title }}" />
+    {% if logo_file|lower ends with '.svg' %}
+        {{ svg_image('theme://images/logo/' ~ logo_file)|raw }}
+    {% else %}
+        <img src="{{ url('theme://images/logo/' ~ logo_file) }}" alt="{{ site.title }}" />
+    {% endif %}
 {% else %}
     {% include '@images/grav-logo.svg' ignore missing %}
 {% endif %}

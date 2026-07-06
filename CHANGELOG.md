@@ -1,3 +1,9 @@
+# v1.1.3
+## 07/06/2026
+
+1. [](#bugfix)
+    * Custom SVG logos are now inlined so they follow light and dark mode like the built-in logo, instead of staying a fixed color
+
 # v1.1.2
 ## 06/24/2026
 
