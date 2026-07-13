@@ -1431,6 +1431,27 @@ input:focus {
   margin-top: 0.25rem;
 }
 
+/* ---------- Login plugin (grav-plugin-login) ---------- */
+
+/* login ships its own css/login.css that hardcodes a light panel (#fcfcfc bg,
+ * #eee border, white delimiter fades) and, being a plugin asset, loads AFTER
+ * theme.css. In dark mode that left the panel white while the fields/text inside
+ * used the theme's dark tokens: unreadable. Scope the override to dark so it
+ * out-specifies the plugin's plain #grav-login and leaves light mode (already
+ * correct) alone. (quark2#14) */
+:root[data-theme="dark"] #grav-login {
+  background: var(--q2-bg-elev);
+  border-color: var(--q2-border-ring);
+  box-shadow: var(--q2-shadow-card);
+  color: var(--q2-text);
+}
+:root[data-theme="dark"] #grav-login .delimiter::before {
+  background-image: linear-gradient(to right, var(--q2-text-muted), var(--q2-bg-elev));
+}
+:root[data-theme="dark"] #grav-login .delimiter::after {
+  background-image: linear-gradient(to left, var(--q2-text-muted), var(--q2-bg-elev));
+}
+
 /* ---------- Form plugin fields ---------- */
 
 /* Tabs — defeat form plugin's box-around-active + forced span color, give proper underlined active state */
