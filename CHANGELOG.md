@@ -1,3 +1,9 @@
+# v1.1.4
+## 07/14/2026
+
+1. [](#bugfix)
+    * The login plugin's admin-style panels now follow dark mode instead of staying light, so the login, forgot, and reset forms match the rest of the theme in dark mode ([#14](https://github.com/getgrav/grav-theme-quark2/issues/14))
+
 # v1.1.3
 ## 07/09/2026
 
