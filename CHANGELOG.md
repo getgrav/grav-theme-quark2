@@ -1,3 +1,11 @@
+# v1.1.5
+## 07/17/2026
+
+1. [](#new)
+    * Tag lists now respect an optional `filterend` limit so you can cap how many tags are shown ([#219](https://github.com/getgrav/grav-theme-quark/issues/219))
+2. [](#bugfix)
+    * The `image_align: left` option on modular text sections now moves the image to the left instead of leaving it on the right ([#16](https://github.com/getgrav/grav-theme-quark2/issues/16))
+
 # v1.1.4
 ## 07/14/2026
 
