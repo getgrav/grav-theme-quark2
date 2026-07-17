@@ -1,8 +1,9 @@
 {% set image = page.media.images|first %}
+{% set image_align = page.header.image_align|default('right')|replace({'align-': ''}) %}
 
 <section class="section modular-text {{ page.header.class }}">
     <div class="container">
-        <div class="columns {{ page.header.image_align|default('align-right') }}">
+        <div class="columns align-{{ image_align }}">
             {% if image %}
                 <div class="column">
                     {{ content|raw }}
