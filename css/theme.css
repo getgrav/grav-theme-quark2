@@ -1087,6 +1087,84 @@ body.overlay-open {
   color: #ffffff;
 }
 
+/* Hero modifier classes (hero_classes) — parity with Quark 1 (#18) */
+
+/* Height presets */
+.hero.hero-fullscreen {
+  min-height: 100dvh;
+}
+.hero.hero-large {
+  min-height: clamp(30rem, 60vh, 34rem);
+}
+.hero.hero-medium {
+  min-height: clamp(24rem, 48vh, 27rem);
+}
+.hero.hero-small {
+  min-height: 7rem;
+}
+.hero.hero-tiny {
+  min-height: 5rem;
+}
+
+/* Foreground presets (theme-independent — for text over imagery) */
+.hero.text-light h1,
+.hero.text-light h2,
+.hero.text-light h3 {
+  color: #ffffff;
+}
+.hero.text-light p,
+.hero.text-light .lead {
+  color: color-mix(in oklab, #ffffff 78%, transparent);
+}
+.hero.text-dark h1,
+.hero.text-dark h2,
+.hero.text-dark h3 {
+  color: var(--q2-text-strong, #111111);
+}
+.hero.text-dark p,
+.hero.text-dark .lead {
+  color: color-mix(in oklab, #242424 72%, transparent);
+}
+
+/* Close h1/h2 title pairing */
+.title-h1h2 h1 {
+  font-weight: 100;
+  margin-bottom: 0;
+  line-height: 1.1;
+}
+.title-h1h2 h1 strong,
+.title-h1h2 h1 b {
+  font-weight: 400;
+}
+.title-h1h2 h1 + h2 {
+  margin-top: 0;
+  margin-bottom: 3rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+/* Image-overlay tints — only meaningful on heroes with a background image */
+.hero[style*="background-image"].overlay-light .image-overlay {
+  background: color-mix(in oklab, #ffffff 40%, transparent);
+}
+.hero[style*="background-image"].overlay-light-gradient .image-overlay {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, #ffffff 50%, transparent),
+    color-mix(in oklab, #ffffff 20%, transparent)
+  );
+}
+.hero[style*="background-image"].overlay-dark .image-overlay {
+  background: color-mix(in oklab, #000000 40%, transparent);
+}
+.hero[style*="background-image"].overlay-dark-gradient .image-overlay {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, #000000 50%, transparent),
+    color-mix(in oklab, #000000 20%, transparent)
+  );
+}
+
 .hero .container {
   position: relative;
   z-index: 1;
