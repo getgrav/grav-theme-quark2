@@ -1,3 +1,11 @@
+# v1.1.6
+## 07/20/2026
+
+1. [](#new)
+    * Restored the full set of hero classes from the original Quark theme, so `hero-fullscreen`, the hero size options, `text-light`/`text-dark`, `title-h1h2`, and the image overlays all work again ([#18](https://github.com/getgrav/grav-theme-quark2/issues/18)).
+2. [](#bugfix)
+    * The hero background parallax effect now works again; it was lost when the theme was rebuilt for Grav 2.0 ([#17](https://github.com/getgrav/grav-theme-quark2/issues/17)).
+
 # v1.1.5
 ## 07/17/2026
 
