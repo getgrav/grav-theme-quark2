@@ -51,6 +51,21 @@
     });
   }
 
+  // Background parallax for hero sections tagged `.parallax`.
+  // Vanilla port of Quark 1's parallaxBackground(); rAF-throttled and
+  // disabled when the visitor prefers reduced motion. Driven off the same
+  // scroll listener as the scroll-state below so there's only one handler.
+  var parallaxNodes = document.querySelectorAll('.hero.parallax');
+  var parallaxOn = parallaxNodes.length && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var parallaxTicking = false;
+  function applyParallax() {
+    var offset = window.scrollY * 0.3;
+    parallaxNodes.forEach(function (el) {
+      el.style.backgroundPositionY = offset + 'px';
+    });
+    parallaxTicking = false;
+  }
+
   // Scroll state (for sticky header shadow + animated shrink)
   // Hysteresis: the navbar shrinks by 12px when `.scrolled` is on, which
   // shifts layout and can flip scrollY back over a single threshold. The
@@ -65,6 +80,10 @@
     if (scrolled !== lastScrolled) {
       body.classList.toggle('scrolled', scrolled);
       lastScrolled = scrolled;
+    }
+    if (parallaxOn && !parallaxTicking) {
+      window.requestAnimationFrame(applyParallax);
+      parallaxTicking = true;
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
