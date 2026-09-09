@@ -5,7 +5,7 @@
     {% set has_children = p.children.visible.count > 0 %}
     <li{% if has_children %} class="has-children"{% endif %}>
       <a href="{{ p.url }}" class="{{ active_page }}">
-        {% if p.header.menu_icon %}<i class="fa-solid fa-{{ p.header.menu_icon }}" aria-hidden="true"></i>{% endif %}
+        {% if p.header.menu_icon %}<i class="{{ p.header.menu_icon|fa_icon }}" aria-hidden="true"></i>{% endif %}
         {{ p.menu }}
       </a>
       {% if has_children %}

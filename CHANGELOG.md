@@ -1,3 +1,9 @@
+# v1.1.12
+## 09/09/2026
+
+1. [](#bugfix)
+    * Icons chosen in the admin now render. The icon picker saves a value with the `fa-` prefix already on it, and the templates added a second one, so a changed icon silently disappeared while the ones shipped with a skeleton kept working. Feature, menu and page icons all accept whatever form the value arrives in. Thanks to @UnixxSH [getgrav/grav-skeleton-onepage-site#20](https://github.com/getgrav/grav-skeleton-onepage-site/issues/20)
+
 # v1.1.11
 ## 08/13/2026
 

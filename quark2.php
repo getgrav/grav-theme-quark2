@@ -49,6 +49,58 @@ class Quark2 extends Theme
 
         $twig->twig->addFunction(new \Twig\TwigFunction('q2_mix_white', [$this, 'mixWithWhite']));
         $twig->twig->addFunction(new \Twig\TwigFunction('q2_mix_alpha', [$this, 'mixWithAlpha']));
+        $twig->twig->addFilter(new \Twig\TwigFilter('fa_icon', [$this, 'faIconClass']));
+    }
+
+    /**
+     * Turn an icon value into the Font Awesome classes that render it.
+     *
+     * Icon values reach a template in several shapes. Admin Next's icon picker
+     * stores a solid icon as `fa-house` and the other families as
+     * `fa-brands fa-github`; a value typed by hand, or carried over from a
+     * Grav 1 site, arrives bare (`house`) or in the old Font Awesome 4 form
+     * (`fa fa-house`). The templates used to write `fa-solid fa-{{ icon }}`,
+     * which turns a picked `fa-house` into `fa-solid fa-fa-house` and renders
+     * nothing, so an icon disappeared the moment it was changed in the admin
+     * (getgrav/grav-skeleton-onepage-site#20).
+     *
+     * @param string|null $icon
+     * @return string
+     */
+    public function faIconClass(?string $icon): string
+    {
+        $icon = trim((string) $icon);
+        if ($icon === '') {
+            return '';
+        }
+
+        $families = [
+            'fa-solid'   => 'fa-solid',   'fas' => 'fa-solid',
+            'fa-regular' => 'fa-regular', 'far' => 'fa-regular',
+            'fa-brands'  => 'fa-brands',  'fab' => 'fa-brands',
+        ];
+
+        $family = '';
+        $name   = '';
+
+        foreach (preg_split('/\s+/', $icon) ?: [] as $token) {
+            if (isset($families[$token])) {
+                $family = $families[$token];
+                continue;
+            }
+            // A bare `fa` or `fa-classic` names the family without naming a
+            // glyph, so it must not be mistaken for the icon name.
+            if ($token === 'fa' || $token === 'fa-classic') {
+                continue;
+            }
+            $name = preg_replace('/^fa-/', '', $token);
+        }
+
+        if ((string) $name === '') {
+            return '';
+        }
+
+        return ($family !== '' ? $family : 'fa-solid') . ' fa-' . $name;
     }
 
     public function mixWithWhite(string $hex, int $pct): string
