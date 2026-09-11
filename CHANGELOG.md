@@ -1,3 +1,12 @@
+# v1.1.13
+## 09/11/2026
+
+1. [](#bugfix)
+    * Meta tag content was escaped twice, so a description containing `&` or a space showed up as `&amp;amp;` and `&#x20;` in the page source. The theme's copy of the metadata partial is gone and Grav core's is used instead, which also adds the `<link rel="alternate" type="text/markdown">` tag for Grav 2.1's Markdown output
+1. [](#improved)
+    * The theme now requires Grav 2.1.0 or later
+    * The sidebar's feed links use Grav 2.1's format-aware page URLs, so a blog at the site root links to `/index.rss` and `/index.atom` instead of working around the home route by hand
+
 # v1.1.12
 ## 09/09/2026
 

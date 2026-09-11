@@ -1,4 +1,3 @@
-{% set feed_url = blog.url == '/' or blog.url == base_url_relative ? (base_url_relative ~ '/' ~ blog.slug) : blog.url %}
 {% set new_base_url = blog.url == '/' ? '' : blog.url %}
 
 {% if config.plugins.simplesearch.enabled %}
@@ -40,8 +39,8 @@
 {% if config.plugins.feed.enabled %}
 <div class="sidebar-content syndicate">
     <h4>{{ 'THEME_QUARK2.SIDEBAR.SYNDICATE.HEADLINE'|t }}</h4>
-    <a class="btn btn-ghost btn-sm" href="{{ feed_url }}.atom"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> Atom</a>
-    <a class="btn btn-ghost btn-sm" href="{{ feed_url }}.rss"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> RSS</a>
+    <a class="btn btn-ghost btn-sm" href="{{ blog.url(false, false, true, false, 'atom')|e }}"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> Atom</a>
+    <a class="btn btn-ghost btn-sm" href="{{ blog.url(false, false, true, false, 'rss')|e }}"><i class="fa-solid fa-square-rss" aria-hidden="true"></i> RSS</a>
     {% if config.plugins.feed.enable_json_feed %}<a class="btn btn-ghost btn-sm" href="{{ feed_url }}.json"><i class="fa-solid fa-code" aria-hidden="true"></i> JSON</a>{% endif %}
 </div>
 {% endif %}
