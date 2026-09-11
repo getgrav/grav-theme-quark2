@@ -36,3 +36,42 @@ en:
       SCORE: "Score"
       POST_COUNT: "Post count"
       OPEN_POST: "Open post"
+
+es:
+  THEME_QUARK2:
+    BLOG:
+      ITEM:
+        NEXT_POST: "Siguiente entrada"
+        PREV_POST: "Entrada anterior"
+    SIDEBAR:
+      RELATED_POSTS:
+        HEADLINE: "Entradas relacionadas"
+      RANDOM_ARTICLE:
+        HEADLINE: "¿Te sientes con suerte?"
+        FEELING_LUCKY: "Leer una entrada aleatoria"
+      POPULAR_TAGS:
+        HEADLINE: "Etiquetas populares"
+      ARCHIVES:
+        HEADLINE: "Archivos"
+      SYNDICATE:
+        HEADLINE: "Suscribirse"
+    THEME_TOGGLE:
+      LABEL: "Apariencia"
+      AUTO: "Automático"
+      LIGHT: "Claro"
+      DARK: "Oscuro"
+      # %s es el modo actual (Automático / Claro / Oscuro). La frase completa
+      # es traducible para que el orden de las palabras pueda diferir del inglés.
+      ARIA_LABEL: "Apariencia: %s"
+      TITLE: "Apariencia: %s (clic para cambiar)"
+    ARIA:
+      PRIMARY_NAV: "Principal"
+      MOBILE_NAV: "Móvil"
+      MENU: "Menú"
+      OPEN_MENU: "Abrir menú"
+      BREADCRUMB: "Ruta de navegación"
+      PAGINATION: "Paginación"
+      POST_NAVIGATION: "Navegación de entradas"
+      SCORE: "Puntuación"
+      POST_COUNT: "Número de entradas"
+      OPEN_POST: "Abrir entrada"
