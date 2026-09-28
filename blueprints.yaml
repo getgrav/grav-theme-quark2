@@ -1,7 +1,7 @@
 name: Quark 2
 slug: quark2
 type: theme
-version: 1.1.14
+version: 1.1.15
 description: The modernized Grav default theme — Blades CSS foundation, Cal.com-inspired aesthetic, with light/dark/auto mode and Font Awesome 7 icons.
 icon: meteor
 author:
@@ -64,6 +64,19 @@ form:
       multiple: false
       accept:
         - image/*
+
+    custom_favicon:
+      type: file
+      label: Custom Favicon
+      help: A PNG, SVG or ICO file, 100 KB at most. Saved to user/themes/quark2/images/favicon. The file stays put across theme updates.
+      filesize: 0.1
+      size: large
+      destination: 'theme://images/favicon'
+      multiple: false
+      accept:
+        - image/png
+        - image/svg+xml
+        - .ico
 
     header-fixed:
       type: toggle
