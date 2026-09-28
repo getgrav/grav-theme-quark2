@@ -1,5 +1,5 @@
 # v1.1.15
-## 09/27/2026
+## 09/28/2026
 
 1. [](#new)
     * You can now upload your own favicon (PNG, SVG or ICO) in the theme settings, next to the custom logos. Thanks @abesnier [#25](https://github.com/getgrav/grav-theme-quark2/pull/25)
