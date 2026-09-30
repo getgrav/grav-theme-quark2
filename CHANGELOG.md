@@ -1,3 +1,10 @@
+# v1.1.16
+## 09/30/2026
+
+1. [](#bugfix)
+    * The 404 and other error pages now sit in the same white content card as regular pages. Thanks @Mikanoshi and @Jah-yee [#26](https://github.com/getgrav/grav-theme-quark2/issues/26)
+    * The "Back home" button on error pages can now be translated instead of always showing English. Thanks @Mikanoshi [#26](https://github.com/getgrav/grav-theme-quark2/issues/26)
+
 # v1.1.15
 ## 09/28/2026
 

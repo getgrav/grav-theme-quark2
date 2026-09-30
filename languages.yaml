@@ -1,5 +1,7 @@
 en:
   THEME_QUARK2:
+    ERROR:
+      BACK_HOME: "Back home"
     BLOG:
       ITEM:
         NEXT_POST: "Next Post"
@@ -39,6 +41,8 @@ en:
 
 es:
   THEME_QUARK2:
+    ERROR:
+      BACK_HOME: "Volver al inicio"
     BLOG:
       ITEM:
         NEXT_POST: "Siguiente entrada"
