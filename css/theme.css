@@ -961,13 +961,15 @@ button.theme-toggle:hover {
   display: block;
 }
 
-/* Mobile hamburger */
+/* Mobile hamburger. It is fixed rather than in the navbar, so `top` has to
+ * centre the 44px button on the mobile navbar row by hand: (64 - 44) / 2. */
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 14px;
+  top: 10px;
   right: 14px;
   z-index: 70;
+  transition: top 0.2s ease;
 }
 button.button_container,
 .button_container {
@@ -1106,6 +1108,10 @@ button.button_container:focus-visible {
   }
   #header .navbar {
     min-height: 64px;
+  }
+  /* header-animated shrinks the navbar to 60px: (60 - 44) / 2 */
+  .header-animated.scrolled .mobile-menu {
+    top: 8px;
   }
   .navbar-section.actions {
     display: none;
