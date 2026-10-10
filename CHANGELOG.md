@@ -1,5 +1,5 @@
 # v1.1.17
-## 10/07/2026
+## 10/09/2026
 
 1. [](#bugfix)
     * On phones the menu button now lines up with the logo, at the top of the page and once the header shrinks on scroll [#28](https://github.com/getgrav/grav-theme-quark2/issues/28)
