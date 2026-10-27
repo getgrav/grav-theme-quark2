@@ -2,7 +2,7 @@
 
 {% if config.plugins.tntsearch.enabled %}
 <div class="sidebar-content">
-    {% include 'partials/tntsearch.html.twig' ignore missing with { dropdown: true } %}
+    {% include 'partials/tntsearch.html.twig' ignore missing with { dropdown: true, submit_to_search_page: true } %}
 </div>
 {% elseif config.plugins.simplesearch.enabled %}
 <div class="sidebar-content">
