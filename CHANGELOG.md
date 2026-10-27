@@ -1,3 +1,11 @@
+# v1.1.19
+## 10/26/2026
+
+1. [](#improved)
+    * Pressing Enter or the search button in the blog sidebar's TNTSearch box opens the full search results page (needs TNTSearch 3.4.9) [trilbymedia/grav-plugin-tntsearch#149](https://github.com/trilbymedia/grav-plugin-tntsearch/issues/149)
+2. [](#bugfix)
+    * The Popular Tags sidebar on a blog post lists the blog's tags instead of coming up empty [#29](https://github.com/getgrav/grav-theme-quark2/pull/29)
+
 # v1.1.18
 ## 10/22/2026
 
