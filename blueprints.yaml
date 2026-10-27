@@ -152,6 +152,18 @@ form:
       validate:
         type: bool
 
+    layout-fluid:
+      type: toggle
+      label: Fluid Layout
+      help: The header, content and footer stretch to the full window width instead of a centered column. A page can turn it on for itself with `body_classes: layout-fluid`.
+      highlight: 0
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
     blog_section:
       type: section
       title: Blog
