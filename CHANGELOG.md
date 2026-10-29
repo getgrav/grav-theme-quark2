@@ -1,5 +1,5 @@
 # v1.1.20
-## 10/27/2026
+## 10/29/2026
 
 1. [](#new)
     * New Fluid Layout option stretches the header, content and footer to the full window width, site-wide or per page with `body_classes: layout-fluid` [#30](https://github.com/getgrav/grav-theme-quark2/issues/30)
