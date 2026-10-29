@@ -510,6 +510,12 @@ blockquote footer {
   margin-inline: auto;
 }
 
+/* layout-fluid: full-width header, content and footer */
+body.layout-fluid .container,
+body.layout-fluid #body-wrapper > .container > .content-item {
+  max-width: none;
+}
+
 /* Default content column — white rounded "card" sitting on the gray canvas */
 #body-wrapper > .container > .content-item {
   max-width: 960px;
