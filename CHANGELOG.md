@@ -1,3 +1,9 @@
+# v1.1.21
+## 11/01/2026
+
+1. [](#bugfix)
+    * Markdown Notices are readable in dark mode, with tinted dark backgrounds instead of the plugin's pale ones under light text
+
 # v1.1.20
 ## 10/29/2026
 
