@@ -1,3 +1,9 @@
+# v1.1.22
+## 11/03/2026
+
+1. [](#bugfix)
+    * The theme's `blueprints.yaml` parses with Symfony YAML again: the Fluid Layout help text had an unquoted colon [#31](https://github.com/getgrav/grav-theme-quark2/issues/31)
+
 # v1.1.21
 ## 11/01/2026
 

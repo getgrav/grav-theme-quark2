@@ -1,7 +1,7 @@
 name: Quark 2
 slug: quark2
 type: theme
-version: 1.1.21
+version: 1.1.22
 description: The modernized Grav default theme — Blades CSS foundation, Cal.com-inspired aesthetic, with light/dark/auto mode and Font Awesome 7 icons.
 icon: meteor
 author:
@@ -155,7 +155,7 @@ form:
     layout-fluid:
       type: toggle
       label: Fluid Layout
-      help: The header, content and footer stretch to the full window width instead of a centered column. A page can turn it on for itself with `body_classes: layout-fluid`.
+      help: 'The header, content and footer stretch to the full window width instead of a centered column. A page can turn it on for itself with `body_classes: layout-fluid`.'
       highlight: 0
       default: 0
       options:
