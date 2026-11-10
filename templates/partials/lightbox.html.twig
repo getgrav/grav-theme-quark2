@@ -1,0 +1,14 @@
+{# Fallback lightbox partial – replaces the premium Lightbox Gallery plugin #}
+{% do assets.addCss('https://cdn.jsdelivr.net/npm/glightbox@3/dist/css/glightbox.min.css') %}
+{% do assets.addJs('https://cdn.jsdelivr.net/npm/glightbox@3/dist/js/glightbox.min.js', {group: 'bottom'}) %}
+
+{% set glightbox_init %}
+document.addEventListener('DOMContentLoaded', function() {
+    GLightbox({ selector: '.glightbox' });
+});
+{% endset %}
+{% do assets.addInlineJs(glightbox_init, {group: 'bottom'}) %}
+
+<a href="{{ image }}" class="glightbox" data-gallery="{{ gallery }}"{% if desc %} data-glightbox-desc="{{ desc }}"{% endif %}>
+    {{ content|raw }}
+</a>
