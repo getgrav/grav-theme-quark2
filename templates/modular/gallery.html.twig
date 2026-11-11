@@ -1,19 +1,10 @@
-{% set styling %}
-.lightbox-gallery { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
-.lightbox-gallery .lightbox-gallery__columns { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-.lightbox-gallery img { display: block; width: 100%; height: auto; border-radius: var(--q2-radius-md); box-shadow: var(--q2-shadow-card); transition: transform .2s ease, filter .2s ease; }
-.lightbox-gallery img:hover { transform: translateY(-2px); filter: brightness(0.92); }
-.lightbox-gallery .hidden { display: none; }
-{% endset %}
-
-{% do assets.addInlineCss(styling) %}
-
 {% block module_content %}
     {% set data = page.header.gallery %}
     {% set thumb_width = data.thumb.width|default(600) %}
     {% set thumb_height = data.thumb.height|default(450) %}
+    {% set columns = data.grid.columns|default(0)|int %}
 
-    <div class="lightbox-gallery">
+    <div class="lightbox-gallery{% if page.header.class %} {{ page.header.class }}{% endif %}{% if columns in 1..5 %} lightbox-gallery--cols-{{ columns }}{% endif %}">
         <div class="lightbox-gallery__columns">
             {% set gallery = md5(page.url) %}
             {% for item in data.items %}

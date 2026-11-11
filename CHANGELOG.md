@@ -1,3 +1,9 @@
+# v1.1.23
+## 11/10/2026
+
+1. [](#new)
+    * The Gallery module has a Columns option, 1 to 5 per gallery, or Auto (the default, unchanged) [#32](https://github.com/getgrav/grav-theme-quark2/pull/32)
+
 # v1.1.22
 ## 11/03/2026
 
