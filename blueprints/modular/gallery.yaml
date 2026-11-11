@@ -30,9 +30,10 @@ form:
             header.gallery.grid.columns:
               type: toggle
               label: Columns
-              default: 3
-              size: small
+              help: Auto fits as many thumbnails per row as the width allows. Narrow screens always show fewer columns.
+              default: 0
               options:
+                0: Auto
                 1: 1
                 2: 2
                 3: 3
@@ -40,9 +41,9 @@ form:
                 5: 5
               validate:
                 type: int
-                min: 1
+                min: 0
                 max: 5
-            
+
             header.gallery.items:
               name: items
               type: list

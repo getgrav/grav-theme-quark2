@@ -2541,50 +2541,54 @@ img {
   }
 }
 
-/* ------ lightbox-gallery ------- */
-.lightbox-gallery.css-grid-columns-1 .lightbox-gallery__columns {
-    grid-template-columns: 1fr;
-}
-
-.lightbox-gallery.css-grid-columns-2 .lightbox-gallery__columns {
-    grid-template-columns: 1fr 1fr;
-}
-
-.lightbox-gallery.css-grid-columns-3 .lightbox-gallery__columns {
-    grid-template-columns: 1fr 1fr 1fr;
-}
-.lightbox-gallery.css-grid-columns-4 .lightbox-gallery__columns {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-.lightbox-gallery.css-grid-columns-5 .lightbox-gallery__columns {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-
+/* Gallery module (templates/modular/gallery.html.twig) */
 .lightbox-gallery {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.25rem;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
 }
 
 .lightbox-gallery .lightbox-gallery__columns {
-    display: grid;
-    gap: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.lightbox-gallery--cols-1 .lightbox-gallery__columns { grid-template-columns: minmax(0, 1fr); }
+.lightbox-gallery--cols-2 .lightbox-gallery__columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lightbox-gallery--cols-3 .lightbox-gallery__columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lightbox-gallery--cols-4 .lightbox-gallery__columns { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.lightbox-gallery--cols-5 .lightbox-gallery__columns { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+@media (max-width: 960px) {
+  .lightbox-gallery--cols-4 .lightbox-gallery__columns,
+  .lightbox-gallery--cols-5 .lightbox-gallery__columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .lightbox-gallery--cols-3 .lightbox-gallery__columns,
+  .lightbox-gallery--cols-4 .lightbox-gallery__columns,
+  .lightbox-gallery--cols-5 .lightbox-gallery__columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .lightbox-gallery img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--q2-radius-md);
-    box-shadow: var(--q2-shadow-card);
-    transition: transform .2s ease, filter .2s ease;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--q2-radius-md);
+  box-shadow: var(--q2-shadow-card);
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .lightbox-gallery img:hover {
-    transform: translateY(-2px);
-    filter: brightness(0.92);
+  transform: translateY(-2px);
+  filter: brightness(0.92);
 }
 
 .lightbox-gallery .hidden {
-    display: none;
+  display: none;
 }
