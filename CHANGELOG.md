@@ -1,3 +1,15 @@
+# v1.1.24
+## 11/13/2026
+
+1. [](#improved)
+    * Form fields in columns line up: inputs, selects and textareas no longer add Pico's margin on top of the field spacing, which spaced every field twice and pushed fields without a text control out of line
+    * Number, telephone, date and time inputs match the other text inputs (they fell back to Pico's grey style), and fieldset legends read as section headings
+    * Field descriptions show as a short muted note under the field instead of as body text
+    * A field with errors has room around its label and inputs and a red tint that also reads in dark mode, and its message is red again instead of taking the body text colour
+    * The Previous, Next and Add buttons of Forms Pro multi-step forms and repeaters match the form's submit button, with Previous and Add in the lighter reset style
+1. [](#bugfix)
+    * A form that shows its errors beside each field now says to check the highlighted fields, instead of an empty "Validation failed:" message
+
 # v1.1.23
 ## 11/10/2026
 

@@ -1550,6 +1550,20 @@ a.btn,
 .form-group {
   margin-bottom: 1.25rem;
 }
+/* .form-group spaces Grav form fields, so drop the margin Pico puts under
+   each control: with both, every field is spaced twice, and fields without a
+   text control (radios, display, calculations) sit out of line in columns */
+.form-field input:not([type="checkbox"], [type="radio"], [type="range"]),
+.form-field select,
+.form-field textarea {
+  margin-bottom: 0;
+}
+.form-wrapper fieldset > legend {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--q2-text-strong);
+  margin-bottom: 0.75rem;
+}
 .form-label {
   display: block;
   font-weight: 500;
@@ -1565,6 +1579,13 @@ input[type="email"],
 input[type="url"],
 input[type="password"],
 input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
 textarea,
 select {
   background: var(--q2-bg-elev);
@@ -1586,6 +1607,13 @@ select {
 :root[data-theme="dark"] input[type="url"],
 :root[data-theme="dark"] input[type="password"],
 :root[data-theme="dark"] input[type="search"],
+:root[data-theme="dark"] input[type="number"],
+:root[data-theme="dark"] input[type="tel"],
+:root[data-theme="dark"] input[type="date"],
+:root[data-theme="dark"] input[type="time"],
+:root[data-theme="dark"] input[type="datetime-local"],
+:root[data-theme="dark"] input[type="month"],
+:root[data-theme="dark"] input[type="week"],
 :root[data-theme="dark"] textarea,
 :root[data-theme="dark"] select {
   border-color: rgba(255, 255, 255, 0.14);
@@ -1614,6 +1642,31 @@ input:focus {
   color: #d12c2c;
   font-size: 0.8125rem;
   margin-top: 0.25rem;
+}
+:root[data-theme="dark"] .form-errors {
+  color: #f07575;
+}
+/* The message is a <p>, which the theme colours as body text */
+.form-errors p {
+  color: inherit;
+}
+/* A field's description sits under it as a quiet note, not as body text */
+.form-wrapper .form-description {
+  display: block;
+  margin-top: 0.375rem;
+  color: var(--q2-text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+/* The Form plugin outlines a field with errors in a 5px box that leaves the
+   label and inputs touching its border: give it room, and a tint that also
+   reads in dark mode */
+.form-wrapper .form-group.has-errors {
+  margin: 0 -0.75rem 1.25rem;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in oklab, #d12c2c 30%, transparent);
+  border-radius: var(--q2-radius);
+  background: color-mix(in oklab, #d12c2c 5%, transparent);
 }
 
 /* ---------- Login plugin (grav-plugin-login) ---------- */
@@ -1765,7 +1818,9 @@ input:focus {
 .form-wrapper .buttons input[type="reset"],
 .form-wrapper .button-wrapper button,
 .form-wrapper .button-wrapper input[type="submit"],
-.form-wrapper .button-wrapper input[type="reset"] {
+.form-wrapper .button-wrapper input[type="reset"],
+.form-wrapper .fp-steps-nav button,
+.form-wrapper .pro-repeater-add {
   width: auto;
   display: inline-flex;
   align-items: center;
@@ -1791,24 +1846,31 @@ input:focus {
 .form-wrapper .buttons button:hover,
 .form-wrapper .buttons input[type="submit"]:hover,
 .form-wrapper .button-wrapper button:hover,
-.form-wrapper .button-wrapper input[type="submit"]:hover {
+.form-wrapper .button-wrapper input[type="submit"]:hover,
+.form-wrapper .fp-steps-nav button:hover,
+.form-wrapper .pro-repeater-add:hover {
   opacity: 0.9;
   color: var(--q2-accent-contrast);
 }
 .form-wrapper .buttons button:active,
-.form-wrapper .button-wrapper button:active {
+.form-wrapper .button-wrapper button:active,
+.form-wrapper .fp-steps-nav button:active {
   transform: translateY(0.5px);
 }
 .form-wrapper .buttons button[type="reset"],
 .form-wrapper .buttons input[type="reset"],
 .form-wrapper .button-wrapper button[type="reset"],
-.form-wrapper .button-wrapper input[type="reset"] {
+.form-wrapper .button-wrapper input[type="reset"],
+.form-wrapper .fp-steps-nav .fp-btn-prev,
+.form-wrapper .pro-repeater-add {
   background: var(--q2-bg-elev);
   color: var(--q2-text);
   box-shadow: var(--q2-shadow-card);
 }
 .form-wrapper .buttons button[type="reset"]:hover,
-.form-wrapper .button-wrapper button[type="reset"]:hover {
+.form-wrapper .button-wrapper button[type="reset"]:hover,
+.form-wrapper .fp-steps-nav .fp-btn-prev:hover,
+.form-wrapper .pro-repeater-add:hover {
   background: var(--q2-bg-muted);
   color: var(--q2-text);
   opacity: 1;
