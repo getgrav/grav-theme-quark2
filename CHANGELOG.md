@@ -1,3 +1,11 @@
+# v1.1.25
+## 11/16/2026
+
+1. [](#improved)
+    * The current page's menu link is marked with `aria-current="page"` for screen readers in both the desktop and mobile menus, and so is the current page number in pagination [#34](https://github.com/getgrav/grav-theme-quark2/issues/34)
+1. [](#bugfix)
+    * The mobile menu works with screen readers: the menu button says whether the menu is open, a closed menu's links are hidden from screen readers and the Tab key, an open menu is read straight after the button, and Escape closes it [#33](https://github.com/getgrav/grav-theme-quark2/issues/33)
+
 # v1.1.24
 ## 11/13/2026
 

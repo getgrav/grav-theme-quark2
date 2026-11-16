@@ -1051,11 +1051,18 @@ button.button_container:focus-visible {
   flex-direction: column;
   padding: 5rem 2rem 2rem;
   transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Hidden, not just off-screen, while closed: screen readers and Tab skip
+   * its links. visibility flips after the slide-out finishes. */
+  visibility: hidden;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s linear 0.3s;
   overflow-y: auto;
 }
 .overlay.open {
   transform: translateX(0);
+  visibility: visible;
+  transition-delay: 0s;
 }
 .overlay .mobile-logo {
   margin-bottom: 2rem;

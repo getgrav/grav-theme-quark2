@@ -70,21 +70,47 @@
     });
   }
 
-  // Mobile menu toggle
+  // Mobile menu toggle. The overlay sits at the end of the page, so while it
+  // is open everything except the button and the overlay is made inert: a
+  // screen reader then reads the menu straight after the button, and Tab
+  // goes from the button into the menu.
   var toggle = document.getElementById('toggle');
   var overlay = document.getElementById('overlay');
   if (toggle && overlay) {
+    var inerted = [];
+    var setMenu = function (open) {
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      overlay.classList.toggle('open', open);
+      document.body.classList.toggle('overlay-open', open);
+      inerted.forEach(function (el) { el.inert = false; });
+      inerted = [];
+      if (!open) return;
+      [toggle, overlay].forEach(function (el) {
+        for (var node = el; node !== document.body; node = node.parentElement) {
+          Array.prototype.forEach.call(node.parentElement.children, function (sib) {
+            if (sib.inert || sib.contains(toggle) || sib.contains(overlay)) return;
+            sib.inert = true;
+            inerted.push(sib);
+          });
+        }
+      });
+    };
+    setMenu(false);
     toggle.addEventListener('click', function () {
-      toggle.classList.toggle('active');
-      overlay.classList.toggle('open');
-      document.body.classList.toggle('overlay-open');
+      setMenu(!overlay.classList.contains('open'));
     });
     overlay.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        toggle.classList.remove('active');
-        overlay.classList.remove('open');
-        document.body.classList.remove('overlay-open');
-      }
+      if (e.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !overlay.classList.contains('open')) return;
+      setMenu(false);
+      toggle.focus();
+    });
+    // Widening past the breakpoint hides the overlay, so close it too
+    matchMedia('(max-width: 860px)').addEventListener('change', function (e) {
+      if (!e.matches) setMenu(false);
     });
   }
 

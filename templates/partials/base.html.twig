@@ -114,7 +114,7 @@
             </div>
         </header>
         <div class="mobile-menu">
-            <button type="button" class="button_container" id="toggle" aria-label="{{ 'THEME_QUARK2.ARIA.OPEN_MENU'|t|e('html_attr') }}">
+            <button type="button" class="button_container" id="toggle" aria-label="{{ 'THEME_QUARK2.ARIA.MENU'|t|e('html_attr') }}" aria-expanded="false" aria-controls="overlay">
                 <span class="top"></span>
                 <span class="middle"></span>
                 <span class="bottom"></span>
@@ -145,7 +145,7 @@
 
     {% block mobile %}
     <div class="mobile-container">
-        <div class="overlay" id="overlay" role="dialog" aria-label="{{ 'THEME_QUARK2.ARIA.MENU'|t|e('html_attr') }}">
+        <div class="overlay" id="overlay">
             <div class="mobile-logo">
                 {% include 'partials/logo.html.twig' with {mobile: true} %}
             </div>
