@@ -1,3 +1,9 @@
+# v1.1.26
+## 11/22/2026
+
+1. [](#bugfix)
+    * A custom SVG logo follows the light/dark toggle and the over-hero header colors however its colors are set in the file. Logos saved from Inkscape, which put the color in a `style` attribute, stayed black in dark mode, outline logos were filled in solid, and over a hero only `<path>` shapes changed color [getgrav/grav#4418](https://github.com/getgrav/grav/issues/4418)
+
 # v1.1.25
 ## 11/16/2026
 

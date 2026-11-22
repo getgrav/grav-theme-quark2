@@ -659,18 +659,12 @@ body.header-dark:not(.scrolled) #header .login-status-wrapper,
 body.header-dark:not(.scrolled) #header .dropmenu > ul > li > a {
   color: #ffffff;
 }
-body.header-dark:not(.scrolled) #header .navbar-brand svg path {
-  fill: #ffffff;
-}
 body.header-light:not(.scrolled) #header,
 body.header-light:not(.scrolled) #header .navbar-brand,
 body.header-light:not(.scrolled) #header .theme-toggle,
 body.header-light:not(.scrolled) #header .login-status-wrapper,
 body.header-light:not(.scrolled) #header .dropmenu > ul > li > a {
   color: #111111;
-}
-body.header-light:not(.scrolled) #header .navbar-brand svg path {
-  fill: #111111;
 }
 
 /* The active pill and the hover chip draw their own background, so they keep
@@ -730,9 +724,24 @@ body.header-light:not(.scrolled) #header .dropmenu > ul > li > a:hover:not(.acti
   width: auto;
   display: block;
 }
-.navbar-brand svg,
-.navbar-brand svg * {
-  fill: var(--q2-text-strong);
+/* Inlined SVG logos take the link colour, so they follow light/dark mode and
+ * the over-hero header colours. Shapes inherit it from the <svg>; shapes that
+ * set their own colour are recoloured too, whether by attribute, by a <style>
+ * class or by a style="" attribute (Inkscape's default, hence !important).
+ * Outlines keep fill:none and have their stroke recoloured instead. */
+.navbar-brand svg:not([fill="none"]),
+.navbar-brand svg [class],
+.navbar-brand svg [fill]:not([fill="none"]) {
+  fill: currentColor;
+}
+.navbar-brand :is(svg, svg *)[style*="fill:"]:not([style*="fill:none"], [style*="fill: none"]) {
+  fill: currentColor !important;
+}
+.navbar-brand :is(svg, svg *)[stroke]:not([stroke="none"]) {
+  stroke: currentColor;
+}
+.navbar-brand :is(svg, svg *)[style*="stroke:"]:not([style*="stroke:none"], [style*="stroke: none"]) {
+  stroke: currentColor !important;
 }
 
 /* Desktop nav */
