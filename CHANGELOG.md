@@ -1,3 +1,9 @@
+# v1.1.27
+## 11/23/2026
+
+1. [](#bugfix)
+    * Modular pages work with Grav 2's Twig 3 compatibility mode turned off, instead of failing with an "Unexpected token" error [getgrav/grav-theme-quark#220](https://github.com/getgrav/grav-theme-quark/issues/220)
+
 # v1.1.26
 ## 11/22/2026
 
