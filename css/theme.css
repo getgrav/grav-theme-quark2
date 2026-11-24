@@ -2594,6 +2594,25 @@ img {
   height: auto;
 }
 
+/* Float helpers, e.g. ![](image.jpg?classes=float-left) */
+.float-left {
+  float: left !important;
+  margin-inline-end: 1rem;
+}
+.float-right {
+  float: right !important;
+  margin-inline-start: 1rem;
+}
+.clearfix::after,
+.content-item::after,
+.e-content::after,
+.blog-page-intro::after,
+.modular-text .column::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /* Focus ring everywhere */
 :focus-visible {
   outline: 2px solid var(--q2-focus-ring);

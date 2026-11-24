@@ -1,3 +1,11 @@
+# v1.1.28
+## 11/24/2026
+
+1. [](#improved)
+    * Blades CSS updated to 3.1 under its new `@sveti/blades` package name. Code blocks are a touch darker and body text no longer hyphenates words at line ends [#36](https://github.com/getgrav/grav-theme-quark2/pull/36)
+1. [](#bugfix)
+    * Images with `?classes=float-left` or `float-right` float with the text wrapping around them, as they did in Quark, and a floated image no longer spills out of the bottom of the page content [#35](https://github.com/getgrav/grav-theme-quark2/issues/35)
+
 # v1.1.27
 ## 11/23/2026
 
