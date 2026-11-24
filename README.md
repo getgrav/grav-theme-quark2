@@ -1,11 +1,11 @@
 # Quark 2 Theme
 
-**Quark 2** is the new default theme for [Grav CMS](https://github.com/getgrav/grav) 2.0. It's a ground-up modernization of the venerable Quark theme that shipped with Grav 1.5 – 1.8, rebuilt on [Blades CSS](https://github.com/anyblades/blades) (the actively maintained successor to Pico CSS), [Font Awesome 7](https://fontawesome.com), and a Cal.com-inspired design system. Quark 2 requires Grav 1.7+ and is the recommended foundation for building your own themes on Grav 2.0.
+**Quark 2** is the new default theme for [Grav CMS](https://github.com/getgrav/grav) 2.0. It's a ground-up modernization of the venerable Quark theme that shipped with Grav 1.5 – 1.8, rebuilt on [Blades CSS](https://github.com/open-sveti/blades) (the actively maintained successor to Pico CSS), [Font Awesome 7](https://fontawesome.com), and a Cal.com-inspired design system. Quark 2 requires Grav 1.7+ and is the recommended foundation for building your own themes on Grav 2.0.
 
 ## Features
 
 * Modernized Cal.com-inspired design system — monochrome palette, refined shadow hierarchy, generous whitespace
-* [Blades CSS](https://github.com/anyblades/blades) v2 foundation (the maintained Pico CSS successor, fully `--pico-*` compatible) — no framework grid, just semantic HTML + CSS custom properties
+* [Blades CSS](https://github.com/open-sveti/blades) v2 foundation (the maintained Pico CSS successor, fully `--pico-*` compatible) — no framework grid, just semantic HTML + CSS custom properties
 * **Cal Sans** display + **Inter** body fonts, hosted locally as woff2 (latin + latin-ext subsets)
 * [Font Awesome 7](https://fontawesome.com) free icon set (CDN by default, with an option to self-host)
 * **Auto / Light / Dark** appearance with `localStorage` persistence and OS-preference fallback — no flash-of-unstyled-content thanks to a pre-paint bootstrap
@@ -217,14 +217,14 @@ If your replacement face is not a system font, load it first (a `@font-face` blo
 
 ### Updating the CSS foundation
 
-The base CSS comes from [Blades CSS](https://github.com/anyblades/blades) and ships pre-built as `css/blades.min.css`. The version is pinned in `package.json`. To rebuild it:
+The base CSS comes from [Blades CSS](https://github.com/open-sveti/blades) and ships pre-built as `css/blades.min.css`. The version is pinned in `package.json`. To rebuild it:
 
     npm install      # installs the pinned Blades release + the minifier
     npm run build    # writes css/blades.min.css
 
 To move to a newer Blades release:
 
-    npm update @anyblades/blades && npm run build
+    npm update @sveti/blades && npm run build
 
 `node_modules` is git-ignored and only the built `css/blades.min.css` is committed, so sites installing the theme need no Node toolchain.
 
