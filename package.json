@@ -5,13 +5,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build:css": "cleancss -o css/blades.min.css node_modules/@anyblades/blades/css/blades.css",
-    "build": "npm run build:css"
+    "build": "cp node_modules/@sveti/blades/css/blades.min.css css/blades.min.css"
   },
   "dependencies": {
-    "@anyblades/blades": "^2.3.0"
-  },
-  "devDependencies": {
-    "clean-css-cli": "^5.6.3"
+    "@sveti/blades": "^3.1.4"
   }
 }
