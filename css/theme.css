@@ -2638,36 +2638,40 @@ img {
   }
 }
 
-/* Gallery module (templates/modular/gallery.html.twig) */
-.lightbox-gallery {
+/* Gallery module (templates/modular/gallery.html.twig). Scoped to the module's
+   own class: `.lightbox-gallery` is also the wrapper of the Lightbox Gallery
+   plugin's [lightbox-gallery] shortcode and of the example partial in the
+   plugin docs, and neither should pick up this layout. The thumbnail styles
+   below stay shared. */
+.modular-gallery {
   max-width: 1200px;
   margin-inline: auto;
   padding-inline: 1.25rem;
 }
 
-.lightbox-gallery .lightbox-gallery__columns {
+.modular-gallery .lightbox-gallery__columns {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
-.lightbox-gallery--cols-1 .lightbox-gallery__columns { grid-template-columns: minmax(0, 1fr); }
-.lightbox-gallery--cols-2 .lightbox-gallery__columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.lightbox-gallery--cols-3 .lightbox-gallery__columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.lightbox-gallery--cols-4 .lightbox-gallery__columns { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.lightbox-gallery--cols-5 .lightbox-gallery__columns { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.modular-gallery.lightbox-gallery--cols-1 .lightbox-gallery__columns { grid-template-columns: minmax(0, 1fr); }
+.modular-gallery.lightbox-gallery--cols-2 .lightbox-gallery__columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.modular-gallery.lightbox-gallery--cols-3 .lightbox-gallery__columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.modular-gallery.lightbox-gallery--cols-4 .lightbox-gallery__columns { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.modular-gallery.lightbox-gallery--cols-5 .lightbox-gallery__columns { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 
 @media (max-width: 960px) {
-  .lightbox-gallery--cols-4 .lightbox-gallery__columns,
-  .lightbox-gallery--cols-5 .lightbox-gallery__columns {
+  .modular-gallery.lightbox-gallery--cols-4 .lightbox-gallery__columns,
+  .modular-gallery.lightbox-gallery--cols-5 .lightbox-gallery__columns {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  .lightbox-gallery--cols-3 .lightbox-gallery__columns,
-  .lightbox-gallery--cols-4 .lightbox-gallery__columns,
-  .lightbox-gallery--cols-5 .lightbox-gallery__columns {
+  .modular-gallery.lightbox-gallery--cols-3 .lightbox-gallery__columns,
+  .modular-gallery.lightbox-gallery--cols-4 .lightbox-gallery__columns,
+  .modular-gallery.lightbox-gallery--cols-5 .lightbox-gallery__columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
