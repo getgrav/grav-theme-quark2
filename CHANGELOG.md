@@ -1,3 +1,9 @@
+# v1.1.29
+## 11/28/2026
+
+1. [](#bugfix)
+    * The Gallery module's grid layout only applies to the Gallery module again. Since 1.1.23 it also reached Lightbox Gallery's `[lightbox-gallery]` shortcode and the example gallery partial in its docs, which wrapped to 3 thumbnails per row instead of 4, and 1 instead of 2 on a phone [getgrav/grav-premium-issues#651](https://github.com/getgrav/grav-premium-issues/issues/651)
+
 # v1.1.28
 ## 11/24/2026
 
